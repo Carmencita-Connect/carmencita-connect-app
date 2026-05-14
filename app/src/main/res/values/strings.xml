@@ -9,4 +9,25 @@
     <string name="btn_cotizar">Cotizar</string>
     <string name="texto_ayuda">¿Necesitas ayuda?</string>
     <string name="texto_llamar">Llamar ahora</string>
+
+    <string name="titulo_cotizar">Cotiza tu envío</string>
+    <string name="label_medidas">Ingresa las medidas de tu paquete</string>
+    <string name="label_largo">Largo (cm)</string>
+    <string name="label_ancho">Ancho (cm)</string>
+    <string name="label_alto">Alto (cm)</string>
+    <string name="label_ingresa_peso">Ingresa el peso de tu paquete</string>
+    <string name="label_peso_kg">Peso (kg)</string>
+    <string name="label_origen_destino">Ingresa el origen y destino</string>
+    <string name="label_origen">Origen</string>
+    <string name="label_destino">Destino</string>
+    <string name="btn_calcular">Calcular tarifa</string>
+    <string name="hint_largo">30</string>
+    <string name="hint_ancho">20</string>
+    <string name="hint_alto">20</string>
+    <string name="hint_peso">5.50</string>
+    <string name="tarifa_estimada">Tarifa estimada</string>
+    <string name="tarifa_inicial">0.00</string>
+    <string name="label_alto_caja">Alto</string>
+    <string name="label_ancho_caja">Ancho</string>
+    <string name="label_largo_caja">Largo</string>
 </resources>
