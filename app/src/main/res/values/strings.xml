@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CarmencitaConnect</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="titulo_invitado">Ingresaste como invitado</string>
+    <string name="btn_ver_agencias">Ver agencias</string>
+    <string name="btn_tracking">Tracking</string>
+    <string name="btn_cotizar">Cotizar</string>
+    <string name="texto_ayuda">¿Necesitas ayuda?</string>
+    <string name="texto_llamar">Llamar ahora</string>
 </resources>

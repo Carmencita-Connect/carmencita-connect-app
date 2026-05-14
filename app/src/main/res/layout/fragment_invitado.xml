@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_boton_titulo"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="@string/titulo_invitado"
+            android:textColor="@color/color_letra_2"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- Imagen camión -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:src="@drawable/img_transporte_cc"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Botón Ver agencias -->
+        <LinearLayout
+            android:id="@+id/btnVerAgencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_boton_blanco"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ico_ver_agencias"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_ver_agencias"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_letra_2"/>
+        </LinearLayout>
+
+        <!-- Botón Tracking -->
+        <LinearLayout
+            android:id="@+id/btnTracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_boton_blanco"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ico_tracking"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_tracking"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_letra_2"/>
+        </LinearLayout>
+
+        <!-- Botón Cotizar -->
+        <LinearLayout
+            android:id="@+id/btnCotizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_boton_blanco"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ico_sol"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_cotizar"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_letra_2"/>
+        </LinearLayout>
+
+        <!-- Botón Llamar -->
+        <LinearLayout
+            android:id="@+id/btnLlamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_boton_titulo"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="24dp"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ico_telefono"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_ayuda"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_letra_2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_llamar"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_letra_2"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
