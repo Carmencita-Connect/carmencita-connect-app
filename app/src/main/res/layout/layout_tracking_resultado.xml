@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_boton_titulo"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="@string/titulo_resultado"
+            android:textColor="@color/color_letra_2"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- Card datos encomienda -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_boton_blanco"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_nro_guia"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvNumeroGuia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_letra_2"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_estado_actual"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_letra_1"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_remitente"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvRemitente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/color_letra_2"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_destinatario"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvDestinatario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/color_letra_2"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_destino_envio"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvDestino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/color_letra_2"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_peso_envio"
+                android:textSize="11sp"
+                android:textColor="@color/color_hint"/>
+            <TextView
+                android:id="@+id/tvPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/color_letra_2"/>
+
+        </LinearLayout>
+
+        <!-- Línea de tiempo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_linea_tiempo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_letra_1"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Estado 1: Registrado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <ImageView
+                android:id="@+id/iconRegistrado"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/checkbox_on_background"
+                android:layout_marginEnd="12dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado_registrado"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_letra_2"/>
+                <TextView
+                    android:id="@+id/tvFechaRegistrado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_hint"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Estado 2: En tránsito -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <ImageView
+                android:id="@+id/iconTransito"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/checkbox_on_background"
+                android:layout_marginEnd="12dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado_transito"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_letra_2"/>
+                <TextView
+                    android:id="@+id/tvFechaTransito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_hint"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Estado 3: En agencia -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <ImageView
+                android:id="@+id/iconAgencia"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/checkbox_on_background"
+                android:layout_marginEnd="12dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado_agencia"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_letra_2"/>
+                <TextView
+                    android:id="@+id/tvFechaAgencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_hint"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Estado 4: Entregado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+            <ImageView
+                android:id="@+id/iconEntregado"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/radiobutton_off_background"
+                android:layout_marginEnd="12dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado_entregado"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_hint"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado_pendiente"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_hint"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Botón nueva búsqueda -->
+        <com.google.android.material.button.MaterialButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/btnVolver"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:text="Nueva búsqueda"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_letra_1"
+            app:cornerRadius="12dp"
+            app:strokeWidth="0dp"/>
+    </LinearLayout>
+</ScrollView>

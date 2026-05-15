@@ -30,4 +30,35 @@
     <string name="label_alto_caja">Alto</string>
     <string name="label_ancho_caja">Ancho</string>
     <string name="label_largo_caja">Largo</string>
+
+
+    <string name="titulo_tracking">Rastrea tu envío</string>
+    <string name="label_numero_guia">Número de guía</string>
+    <string name="hint_guia">Ej. C0000000001</string>
+    <string name="btn_buscar">Buscar envío</string>
+    <string name="validando">Validando …</string>
+    <string name="validando_guia">Validando número de guía</string>
+    <string name="validando_espera">Por favor espera un momento</string>
+    <string name="codigo_invalido">Código inválido</string>
+    <string name="error_guia">El número de guía que ingresaste no existe</string>
+    <string name="titulo_resultado">Tracking de envío</string>
+    <string name="label_nro_guia">Nro de guía</string>
+    <string name="label_estado">Estado actual</string>
+    <string name="label_remitente">Remitente</string>
+    <string name="label_destinatario">Destinatario</string>
+
+    <string name="label_peso">Peso</string>
+    <string name="titulo_linea_tiempo">Línea de tiempo</string>
+    <string name="estado_registrado">Registrado</string>
+    <string name="estado_transito">En tránsito</string>
+    <string name="estado_agencia">En agencia</string>
+    <string name="estado_entregado">Entregado</string>
+    <string name="estado_pendiente">Pendiente</string>
+
+    <string name="label_estado_actual">Estado actual</string>
+    <string name="label_destino_envio">Destino</string>
+    <string name="label_peso_envio">Peso</string>
+    <string name="validando_titulo">Validando...</string>
+    <string name="validando_subtitulo">Validando número de guía</string>
+    <string name="btn_intentar">Intentar de nuevo</string>
 </resources>
