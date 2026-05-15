@@ -7,5 +7,10 @@ data class Encomienda(
     val remitente: String = "",
     val destinatario: String = "",
     val origen: String = "",
-    val destino: String = ""
+    val destino: String = "",
+    val peso: Double = 0.0,
+    val fechaRegistro: String? = null,
+    val fechaTransito: String? = null,
+    val fechaAgencia: String? = null,
+    val fechaEntrega: String? = null
 )
