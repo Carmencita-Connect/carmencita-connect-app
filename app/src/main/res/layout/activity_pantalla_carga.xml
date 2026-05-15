@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Pantalla_Carga">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_logo"/>
+
+    <!-- Lottie paquete -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottiePlataforma"
+        android:layout_width="280dp"
+        android:layout_height="180dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="paquete.json"
+        app:lottie_loop="true"/>
+
+    <!-- Lottie loading circular -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLoading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="cargacircular.json"
+        app:lottie_loop="true"/>
+
+    <!-- Nombre app -->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/color_letra_2"
+        android:textSize="18sp"
+        android:fontFamily="cursive"
+        android:textStyle="bold"/>
+
+    <!-- Versión -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/version"
+        android:textColor="@color/color_letra_2"
+        android:textSize="13sp"/>
+
+</LinearLayout>

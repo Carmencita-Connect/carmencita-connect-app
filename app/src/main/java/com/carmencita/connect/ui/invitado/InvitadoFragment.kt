@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentInvitadoBinding
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
-import com.carmencita.connect.R
 import com.carmencita.connect.ui.tracking.TrackingFragment
 
 class InvitadoFragment : Fragment() {
 
-    // viewBinding — método del profe
     private var _binding: FragmentInvitadoBinding? = null
     private val binding get() = _binding!!
 
@@ -23,7 +22,6 @@ class InvitadoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // inflar el layout con viewBinding
         _binding = FragmentInvitadoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,26 +31,36 @@ class InvitadoFragment : Fragment() {
 
         // Botón Ver agencias
         binding.btnVerAgencias.setOnClickListener {
-            // TODO: navegar a Agencias
-
-            // Botón Tracking
-            binding.btnTracking.setOnClickListener {
-                // TODO: navegar a Tracking
-            }
-
-            // Botón Cotizar
-            binding.btnCotizar.setOnClickListener {
-                // TODO: navegar a Cotizar
-            }
-
-            // Botón Llamar — abre el marcador con el número de Carmencita
-            binding.btnLlamar.setOnClickListener {
-                val intent = Intent(Intent.ACTION_DIAL).apply {
-                    data = Uri.parse("tel:044123456")
-                }
-                startActivity(intent)
-            }
+            // TODO: navegar a agencias
         }
 
+        // Botón Tracking
+        binding.btnTracking.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, TrackingFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // Botón Cotizar
+        binding.btnCotizar.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, CotizacionFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // Botón Llamar
+        binding.btnLlamar.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:+51940009748")
+            }
+            startActivity(intent)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
