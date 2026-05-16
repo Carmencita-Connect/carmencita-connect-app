@@ -294,7 +294,6 @@
             app:strokeWidth="0dp"/>
 
         <!-- Resultado -->
-
         <LinearLayout
             android:id="@+id/layoutResultado"
             android:layout_width="match_parent"
@@ -336,8 +335,23 @@
                     android:textStyle="bold"/>
 
             </LinearLayout>
-
         </LinearLayout>
+
+        <!-- Botón pre-registro — FUERA del resultado -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPreRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/btn_realizar_preregistro"
+            android:textColor="@color/color_letra_1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/color_letra_1"
+            app:strokeWidth="1.5dp"/>
 
     </LinearLayout>
 </ScrollView>

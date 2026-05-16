@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_boton_titulo"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="@string/titulo_preregistro"
+            android:textColor="@color/color_letra_2"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- Completa la información -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/label_completa_info"
+            android:textColor="@color/color_letra_1"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <!-- Remitente -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_remitente"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etRemitente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_remitente"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <!-- Destinatario -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_destinatario"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etDestinatario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_destinatario"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <!-- Selecciona modo de pago -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/label_modo_pago"
+            android:textColor="@color/color_letra_1"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <!-- Botón Pago en agencia -->
+        <LinearLayout
+            android:id="@+id/btnPagoAgencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ico_ver_agencias"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_pago_agencia"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Botón Pago digital -->
+        <LinearLayout
+            android:id="@+id/btnPagoDigital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ico_sol"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_pago_digital"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Error -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:textColor="#E53935"
+            android:textSize="13sp"
+            android:visibility="gone"/>
+
+        <!-- Botón Continuar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinuar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/btn_continuar"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_letra_1"
+            app:cornerRadius="12dp"
+            app:strokeWidth="0dp"/>
+
+        <!-- Botón Eliminar pre-registro -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/btn_eliminar_preregistro"
+            android:textColor="@color/color_letra_1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/color_letra_1"
+            app:strokeWidth="1.5dp"/>
+
+    </LinearLayout>
+</ScrollView>

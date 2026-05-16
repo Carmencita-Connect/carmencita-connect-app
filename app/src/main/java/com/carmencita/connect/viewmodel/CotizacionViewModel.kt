@@ -15,6 +15,22 @@ class CotizacionViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
+    // Datos expuestos para PreRegistroFragment
+    private val _destinoSeleccionado = MutableLiveData<String>()
+    val destinoSeleccionado: LiveData<String> = _destinoSeleccionado
+
+    private val _largo = MutableLiveData<Double>()
+    val largo: LiveData<Double> = _largo
+
+    private val _ancho = MutableLiveData<Double>()
+    val ancho: LiveData<Double> = _ancho
+
+    private val _alto = MutableLiveData<Double>()
+    val alto: LiveData<Double> = _alto
+
+    private val _peso = MutableLiveData<Double>()
+    val peso: LiveData<Double> = _peso
+
     fun calcularTarifa(
         largo: String,
         ancho: String,
@@ -23,9 +39,8 @@ class CotizacionViewModel : ViewModel() {
         origen: String,
         destino: String
     ) {
-
         if (largo.isEmpty() || ancho.isEmpty() ||
-            alto.isEmpty()  || peso.isEmpty()) {
+            alto.isEmpty() || peso.isEmpty()) {
             _error.value = "Completa todas las medidas"
             return
         }
@@ -52,11 +67,25 @@ class CotizacionViewModel : ViewModel() {
             return
         }
 
-        val total = repository.calcularTarifa(
-            largoD, anchoD, altoD, pesoD, destino
-        )
+        // Guardar datos para PreRegistro
+        _largo.value = largoD
+        _ancho.value = anchoD
+        _alto.value  = altoD
+        _peso.value  = pesoD
+        _destinoSeleccionado.value = destino
 
+        val total = repository.calcularTarifa(largoD, anchoD, altoD, pesoD, destino)
         _error.value = ""
         _costoEstimado.value = total
+    }
+
+    fun resetear() {
+        _costoEstimado.value = 0.0
+        _error.value = ""
+        _destinoSeleccionado.value = ""
+        _largo.value = 0.0
+        _ancho.value = 0.0
+        _alto.value = 0.0
+        _peso.value = 0.0
     }
 }

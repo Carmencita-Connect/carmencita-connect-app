@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.carmencita.connect.databinding.FragmentCotizacionBinding
 import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.R
 
 class CotizacionFragment : Fragment() {
 
     private var _binding: FragmentCotizacionBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CotizacionViewModel by viewModels()
+    private val viewModel: CotizacionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,13 +54,30 @@ class CotizacionFragment : Fragment() {
             false
         }
 
-
-        viewModel.costoEstimado.observe(viewLifecycleOwner) { costo ->
-            binding.layoutResultado.visibility = View.VISIBLE
-            binding.tvTarifa.text = "%.2f".format(costo)
-            binding.tvError.visibility = View.GONE
+        // Botón realizar pre-registro
+        binding.btnPreRegistro.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment,
+                    com.carmencita.connect.ui.preregistro.PreRegistroFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
+        viewModel.costoEstimado.observe(viewLifecycleOwner) { costo ->
+            if (costo == 0.0) {
+                binding.layoutResultado.visibility = View.GONE
+                binding.btnPreRegistro.visibility  = View.GONE
+                binding.etLargo.text.clear()
+                binding.etAncho.text.clear()
+                binding.etAlto.text.clear()
+                binding.etPeso.text.clear()
+            } else {
+                binding.layoutResultado.visibility = View.VISIBLE
+                binding.btnPreRegistro.visibility  = View.VISIBLE
+                binding.tvTarifa.text = "%.2f".format(costo)
+                binding.tvError.visibility = View.GONE
+            }
+        }
         // Observar errores
         viewModel.error.observe(viewLifecycleOwner) { mensaje ->
             if (mensaje.isNotEmpty()) {
