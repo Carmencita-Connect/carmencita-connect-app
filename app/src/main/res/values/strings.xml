@@ -60,4 +60,21 @@
     <string name="validando_titulo">Validando...</string>
     <string name="validando_subtitulo">Validando número de guía</string>
     <string name="btn_intentar">Intentar de nuevo</string>
+
+    <!-- HU-02 Pre-registro -->
+    <string name="titulo_preregistro">Pre registro</string>
+    <string name="label_completa_info">Completa la información</string>
+    <string name="hint_remitente">John Elias</string>
+    <string name="hint_destinatario">Luisa Torres</string>
+    <string name="label_modo_pago">Selecciona tu modo de pago</string>
+    <string name="btn_pago_agencia">Pago en agencia</string>
+    <string name="btn_pago_digital">Pago digital</string>
+    <string name="btn_continuar">Continuar</string>
+    <string name="btn_eliminar_preregistro">Eliminar pre registro</string>
+    <string name="error_campo_vacio">Completa todos los campos</string>
+    <string name="error_solo_letras">Solo se permiten letras</string>
+    <string name="error_selecciona_pago">Selecciona un método de pago</string>
+    <string name="btn_realizar_preregistro">Realizar pre-registro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
