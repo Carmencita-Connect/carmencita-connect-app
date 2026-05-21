@@ -3,12 +3,19 @@ package com.carmencita.connect
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.carmencita.connect.ui.invitado.InvitadoFragment
+import com.stripe.android.PaymentConfiguration
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Inicializar Stripe — va ANTES de cargar fragments
+        PaymentConfiguration.init(
+            applicationContext,
+            "pk_test_51TZNAe40wQ1eY6er9ekzm9Z68jDydYtPScUWgrYwkZYyqgXz0CwVtdl7djFfmkkMKFkO6tp30X0knkfvqTa4pKzE00y6wH6Hpu"
+        )
 
         // Carga InvitadoFragment al iniciar
         if (savedInstanceState == null) {
