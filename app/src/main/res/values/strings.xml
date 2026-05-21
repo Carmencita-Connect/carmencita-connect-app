@@ -75,6 +75,27 @@
     <string name="error_solo_letras">Solo se permiten letras</string>
     <string name="error_selecciona_pago">Selecciona un método de pago</string>
     <string name="btn_realizar_preregistro">Realizar pre-registro</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- HU-03 Pago digital -->
+    <string name="titulo_pago_digital">Pago digital</string>
+    <string name="label_selecciona_metodo">Selecciona tu método de pago</string>
+    <string name="metodo_tarjeta">Tarjeta de crédito / débito</string>
+    <string name="metodo_yape">Yape</string>
+    <string name="metodo_transferencia">Transferencia bancaria</string>
+    <string name="label_detalles_envio">Detalles del envío</string>
+    <string name="label_destino_pago">Destino</string>
+    <string name="label_remitente_pago">Remitente</string>
+    <string name="label_destinatario_pago">Destinatario</string>
+    <string name="label_modo_pago_detalle">Modo de pago</string>
+    <string name="label_costo">Costo (S/)</string>
+    <string name="label_medidas_detalle">Medidas</string>
+    <string name="label_peso_detalle">Peso (kg)</string>
+    <string name="btn_confirmar_preregistro">Confirmar pre registro</string>
+    <string name="btn_actualizar_preregistro">Actualizar pre registro</string>
+    <string name="validando_pago_titulo">Validando ...</string>
+    <string name="validando_pago_subtitulo">Validando método de pago</string>
+    <string name="pago_exitoso">¡Pre registro realizado exitosamente!</string>
+    <string name="label_numero_preregistro">Número de pre registro</string>
+    <string name="btn_inicio">Inicio</string>
+    <string name="btn_descargar_comprobante">Descargar comprobante de pago</string>
+    <string name="error_selecciona_metodo_pago">Selecciona un método de pago</string>
 </resources>

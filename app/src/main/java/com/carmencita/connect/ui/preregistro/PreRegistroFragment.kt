@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPreregistroBinding
 import com.carmencita.connect.viewmodel.CotizacionViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
@@ -95,12 +96,24 @@ class PreRegistroFragment : Fragment() {
 
         // Observar resultado
         viewModel.preRegistroGuardado.observe(viewLifecycleOwner) { preRegistro ->
-            preRegistro ?: return@observe  // ← ignora si es null
-            android.widget.Toast.makeText(
-                requireContext(),
-                "Pre-registro #${preRegistro.id} guardado",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
+            preRegistro ?: return@observe
+
+            // Si el método es digital → navega a pago digital
+            if (metodoPagoSeleccionado == "digital") {
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.contenedorFragment,
+                        com.carmencita.connect.ui.pago.PagoDigitalFragment())
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                // Pago en agencia → Toast por ahora
+                android.widget.Toast.makeText(
+                    requireContext(),
+                    "Pre-registro #${preRegistro.id} guardado — pago en agencia",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         // Observar errores
