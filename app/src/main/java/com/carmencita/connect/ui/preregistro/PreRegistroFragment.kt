@@ -98,21 +98,18 @@ class PreRegistroFragment : Fragment() {
         viewModel.preRegistroGuardado.observe(viewLifecycleOwner) { preRegistro ->
             preRegistro ?: return@observe
 
-            // Si el método es digital → navega a pago digital
             if (metodoPagoSeleccionado == "digital") {
                 parentFragmentManager.beginTransaction()
-                    .replace(
-                        R.id.contenedorFragment,
+                    .replace(R.id.contenedorFragment,
                         com.carmencita.connect.ui.pago.PagoDigitalFragment())
                     .addToBackStack(null)
                     .commit()
-            } else {
-                // Pago en agencia → Toast por ahora
-                android.widget.Toast.makeText(
-                    requireContext(),
-                    "Pre-registro #${preRegistro.id} guardado — pago en agencia",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show()
+            } else if (metodoPagoSeleccionado == "agencia") {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.contenedorFragment,
+                        com.carmencita.connect.ui.pago.PagoPresencialFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
         }
 

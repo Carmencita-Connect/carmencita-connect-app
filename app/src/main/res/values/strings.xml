@@ -75,6 +75,7 @@
     <string name="error_solo_letras">Solo se permiten letras</string>
     <string name="error_selecciona_pago">Selecciona un método de pago</string>
     <string name="btn_realizar_preregistro">Realizar pre-registro</string>
+
     <!-- HU-03 Pago digital -->
     <string name="titulo_pago_digital">Pago digital</string>
     <string name="label_selecciona_metodo">Selecciona tu método de pago</string>
@@ -98,4 +99,10 @@
     <string name="btn_inicio">Inicio</string>
     <string name="btn_descargar_comprobante">Descargar comprobante de pago</string>
     <string name="error_selecciona_metodo_pago">Selecciona un método de pago</string>
+
+    <!-- HU-04 Pago presencial -->
+    <string name="titulo_vista_preliminar">Vista preliminar</string>
+    <string name="pago_presencial_exitoso">¡Pre registro realizado exitosamente!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
