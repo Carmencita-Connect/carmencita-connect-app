@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -32,13 +33,43 @@ class CotizacionFragment : Fragment() {
 
         // Botón calcular
         binding.btnCalcular.setOnClickListener {
+            // Resaltar campos vacíos en rojo
+            var hayError = false
+
+            if (binding.etLargo.text.isEmpty()) {
+                binding.etLargo.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_error)
+                hayError = true
+            } else {
+                binding.etLargo.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_texto)
+            }
+
+            if (binding.etAncho.text.isEmpty()) {
+                binding.etAncho.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_error)
+                hayError = true
+            } else {
+                binding.etAncho.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_texto)
+            }
+
+            if (binding.etAlto.text.isEmpty()) {
+                binding.etAlto.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_error)
+                hayError = true
+            } else {
+                binding.etAlto.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_texto)
+            }
+
+            if (binding.etPeso.text.isEmpty()) {
+                binding.etPeso.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_error)
+                hayError = true
+            } else {
+                binding.etPeso.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_campo_texto)
+            }
 
             viewModel.calcularTarifa(
-                largo  = binding.etLargo.text.toString().trim(),
-                ancho  = binding.etAncho.text.toString().trim(),
-                alto   = binding.etAlto.text.toString().trim(),
-                peso   = binding.etPeso.text.toString().trim(),
-                origen = binding.spinnerOrigen.selectedItem.toString(),
+                largo   = binding.etLargo.text.toString().trim(),
+                ancho   = binding.etAncho.text.toString().trim(),
+                alto    = binding.etAlto.text.toString().trim(),
+                peso    = binding.etPeso.text.toString().trim(),
+                origen  = binding.spinnerOrigen.selectedItem.toString(),
                 destino = binding.spinnerDestino.selectedItem.toString()
             )
         }
@@ -92,6 +123,7 @@ class CotizacionFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.resetear()
         _binding = null
     }
 }

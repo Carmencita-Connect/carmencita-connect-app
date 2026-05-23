@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.carmencita.connect.data.TarifaRepository
+import com.carmencita.connect.model.Tarifa
 
 class CotizacionViewModel : ViewModel() {
 
@@ -30,6 +31,9 @@ class CotizacionViewModel : ViewModel() {
 
     private val _peso = MutableLiveData<Double>()
     val peso: LiveData<Double> = _peso
+
+    private val _tarifa = MutableLiveData<Tarifa>()
+    val tarifa: LiveData<Tarifa> = _tarifa
 
     fun calcularTarifa(
         largo: String,
@@ -67,16 +71,16 @@ class CotizacionViewModel : ViewModel() {
             return
         }
 
-        // Guardar datos para PreRegistro
         _largo.value = largoD
         _ancho.value = anchoD
         _alto.value  = altoD
         _peso.value  = pesoD
         _destinoSeleccionado.value = destino
 
-        val total = repository.calcularTarifa(largoD, anchoD, altoD, pesoD, destino)
+        val tarifa = repository.calcularTarifa(largoD, anchoD, altoD, pesoD, destino)
         _error.value = ""
-        _costoEstimado.value = total
+        _tarifa.value = tarifa
+        _costoEstimado.value = tarifa.costo
     }
 
     fun resetear() {
@@ -87,5 +91,6 @@ class CotizacionViewModel : ViewModel() {
         _ancho.value = 0.0
         _alto.value = 0.0
         _peso.value = 0.0
+        _tarifa.value = Tarifa()
     }
 }
