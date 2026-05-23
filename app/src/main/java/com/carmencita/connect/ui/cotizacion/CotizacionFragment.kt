@@ -119,11 +119,21 @@ class CotizacionFragment : Fragment() {
                 binding.tvError.visibility = View.GONE
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.resetear()
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.resetear()
         _binding = null
     }
+
 }
