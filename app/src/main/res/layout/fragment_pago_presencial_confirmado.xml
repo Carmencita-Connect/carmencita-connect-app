@@ -55,10 +55,12 @@
             android:id="@+id/tvNumeroPresencial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PR-2026-0000001"
+            android:text=""
             android:textColor="@color/color_letra_1"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
     </LinearLayout>
 
     <!-- Solo botón Inicio — sin comprobante -->

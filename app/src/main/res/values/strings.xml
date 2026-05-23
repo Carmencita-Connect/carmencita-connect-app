@@ -103,6 +103,12 @@
     <!-- HU-04 Pago presencial -->
     <string name="titulo_vista_preliminar">Vista preliminar</string>
     <string name="pago_presencial_exitoso">¡Pre registro realizado exitosamente!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- HU-05 Comprobante -->
+    <string name="generando_comprobante">Generando tu comprobante </string>
+    <string name="generando_espera">Por favor espera un momento</string>
+    <string name="comprobante_exitoso">¡Comprobante descargado con éxito!</string>
+    <string name="btn_inicio_comprobante">Inicio</string>
+    <string name="label_numero_boleta">Número de pre registro</string>
+
 </resources>

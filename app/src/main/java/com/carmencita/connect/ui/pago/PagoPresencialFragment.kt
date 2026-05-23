@@ -39,7 +39,7 @@ class PagoPresencialFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .replace(
                     R.id.contenedorFragment,
-                    PagoConfirmadoFragment.newInstance(numero),
+                    PagoPresencialConfirmadoFragment.newInstance(numero),
                     "confirmado"
                 )
                 .addToBackStack(null)

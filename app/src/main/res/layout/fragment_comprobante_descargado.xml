@@ -9,28 +9,40 @@
     android:background="@color/white"
     android:padding="32dp">
 
-    <!-- Círculo check -->
-    <LinearLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/bg_circulo_check"
-        android:gravity="center"
+    <!-- Ícono documento con check -->
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✓"
-            android:textColor="@color/white"
-            android:textSize="36sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ico_comprobante"
+            android:scaleType="fitCenter"/>
+
+        <!-- Círculo check verde -->
+        <LinearLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_circulo_check"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </FrameLayout>
 
     <!-- Mensaje éxito -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pago_exitoso"
+        android:text="@string/comprobante_exitoso"
         android:textColor="@color/color_letra_2"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -49,14 +61,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_numero_preregistro"
+            android:text="@string/label_numero_boleta"
             android:textColor="@color/color_letra_2"
             android:textSize="13sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <TextView
-            android:id="@+id/tvNumeroPreRegistro"
+            android:id="@+id/tvNumeroBoleta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -69,25 +81,10 @@
 
     <!-- Botón Inicio -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnInicio"
+        android:id="@+id/btnInicioComprobante"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/btn_inicio"
-        android:textColor="@color/color_letra_1"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/white"
-        app:cornerRadius="12dp"
-        app:strokeColor="@color/color_letra_1"
-        app:strokeWidth="1.5dp"/>
-
-    <!-- Botón Descargar comprobante -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDescargarComprobante"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="@string/btn_descargar_comprobante"
+        android:text="@string/btn_inicio_comprobante"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
