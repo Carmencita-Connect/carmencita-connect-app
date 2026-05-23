@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPagoConfirmadoBinding
+import com.carmencita.connect.viewmodel.ComprobanteViewModel
 import com.carmencita.connect.viewmodel.PagoViewModel
+import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.viewmodel.PreRegistroViewModel
 
 class PagoConfirmadoFragment : Fragment() {
 
@@ -16,6 +19,9 @@ class PagoConfirmadoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: PagoViewModel by activityViewModels()
+    private val comprobanteViewModel: ComprobanteViewModel by activityViewModels()
+    private val cotizacionViewModel: CotizacionViewModel by activityViewModels()
+    private val preRegistroViewModel: PreRegistroViewModel by activityViewModels()
 
     companion object {
         fun newInstance(numeroPR: String) = PagoConfirmadoFragment().apply {
@@ -53,11 +59,48 @@ class PagoConfirmadoFragment : Fragment() {
 
         // Botón Descargar comprobante
         binding.btnDescargarComprobante.setOnClickListener {
-            android.widget.Toast.makeText(
-                requireContext(),
-                "Comprobante descargado",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
+            iniciarDescargaComprobante()
+        }
+    }
+
+    private fun iniciarDescargaComprobante() {
+        val numeroPR = arguments?.getString("numeroPR") ?: ""
+        val preRegistro = preRegistroViewModel.preRegistroGuardado.value
+
+        val dialog = ComprobanteGenerandoDialog()
+        dialog.isCancelable = false
+        dialog.show(parentFragmentManager, "ComprobanteGenerandoDialog")
+
+        comprobanteViewModel.generarComprobante(
+            context      = requireContext(),
+            numeroPR     = numeroPR,
+            remitente    = preRegistro?.remitente ?: "",
+            destinatario = preRegistro?.destinatario ?: "",
+            origen       = "Trujillo",
+            destino      = cotizacionViewModel.destinoSeleccionado.value ?: "",
+            costo        = cotizacionViewModel.costoEstimado.value ?: 0.0,
+            peso         = cotizacionViewModel.peso.value ?: 0.0,
+            metodoPago   = preRegistro?.metodoPago ?: "digital"
+        )
+
+        comprobanteViewModel.estado.observe(viewLifecycleOwner) { estado ->
+            when (estado) {
+                is ComprobanteViewModel.ComprobanteEstado.Descargado -> {
+                    dialog.dismiss()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.contenedorFragment,
+                            ComprobanteDescargadoFragment.newInstance(estado.numeroPR))
+                        .addToBackStack(null)
+                        .commit()
+                }
+                is ComprobanteViewModel.ComprobanteEstado.Error -> {
+                    dialog.dismiss()
+                    android.widget.Toast.makeText(
+                        requireContext(), estado.mensaje, android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {}
+            }
         }
     }
 

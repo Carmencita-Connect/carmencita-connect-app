@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Hoja del documento -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00B3A5"
+        android:strokeWidth="1.5"
+        android:pathData="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2Z"/>
+
+    <!-- Doblez esquina -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00B3A5"
+        android:strokeWidth="1.5"
+        android:pathData="M14,2V8H20"/>
+
+    <!-- Flecha de descarga -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00B3A5"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M12,12V17"/>
+
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00B3A5"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M9.5,14.5L12,17L14.5,14.5"/>
+
+    <!-- Línea base -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00B3A5"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M9,19H15"/>
+
+</vector>
