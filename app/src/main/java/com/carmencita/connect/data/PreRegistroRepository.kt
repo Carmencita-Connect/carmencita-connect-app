@@ -1,28 +1,34 @@
 package com.carmencita.connect.data
 
+import com.carmencita.connect.model.Encomienda
+import com.carmencita.connect.model.Persona
 import com.carmencita.connect.model.PreRegistro
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class PreRegistroRepository {
 
-    // Lista temporal en memoria
     private val preRegistros = mutableListOf<PreRegistro>()
 
-    fun guardar(preRegistro: PreRegistro): PreRegistro {
-        val nuevo = preRegistro.copy(
-            id = (1000..9999).random(),
-            fechaCreacion = java.text.SimpleDateFormat(
-                "dd/MM/yy", java.util.Locale.getDefault()
-            ).format(java.util.Date())
+    fun guardar(
+        remitente: Persona,
+        destinatario: Persona,
+        descripcionCarga: String,
+        encomienda: Encomienda
+    ): PreRegistro {
+        val nuevo = PreRegistro(
+            id               = (1000..9999).random(),
+            remitente        = remitente,
+            destinatario     = destinatario,
+            descripcionCarga = descripcionCarga,
+            encomienda       = encomienda,
+            estado           = "pendiente",
+            fechaCreacion    = SimpleDateFormat(
+                "dd/MM/yy", Locale.getDefault()
+            ).format(Date())
         )
         preRegistros.add(nuevo)
         return nuevo
-    }
-
-    fun eliminar(id: Int) {
-        preRegistros.removeAll { it.id == id }
-    }
-
-    fun obtenerTodos(): List<PreRegistro> {
-        return preRegistros.toList()
     }
 }

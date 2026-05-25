@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPagoPresencialBinding
-import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.viewmodel.PagoPresencialViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
 
 class PagoPresencialFragment : Fragment() {
@@ -16,7 +16,7 @@ class PagoPresencialFragment : Fragment() {
     private var _binding: FragmentPagoPresencialBinding? = null
     private val binding get() = _binding!!
 
-    private val cotizacionViewModel: CotizacionViewModel by activityViewModels()
+    private val viewModel: PagoPresencialViewModel by activityViewModels()
     private val preRegistroViewModel: PreRegistroViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -33,53 +33,65 @@ class PagoPresencialFragment : Fragment() {
 
         cargarDetallesEnvio()
 
-        // Botón confirmar
-        binding.btnConfirmarPresencial.setOnClickListener {
-            val numero = "PR-2026-%07d".format((1..9999999).random())
+        binding.btnConfirmar.setOnClickListener {
+            val monto = preRegistroViewModel.preRegistroGuardado.value
+                ?.encomienda?.tarifa?.costo ?: 0.0
+            preRegistroViewModel.marcarComoPagado()
+            viewModel.confirmarPago(monto)
+        }
+
+        viewModel.pagoConfirmado.observe(viewLifecycleOwner) { pago ->
+            pago ?: return@observe
             parentFragmentManager.beginTransaction()
                 .replace(
                     R.id.contenedorFragment,
-                    PagoPresencialConfirmadoFragment.newInstance(numero),
+                    PagoPresencialConfirmadoFragment.newInstance(pago.numeroPR),
                     "confirmado"
                 )
                 .addToBackStack(null)
                 .commit()
         }
 
-        // Botón eliminar
-        binding.btnEliminarPresencial.setOnClickListener {
-            cotizacionViewModel.resetear()
-            preRegistroViewModel.resetear()
-            parentFragmentManager.popBackStack(
-                null,
-                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-            )
-        }
-
-        // Botón actualizar — vuelve al pre-registro
-        binding.btnActualizarPresencial.setOnClickListener {
+        binding.btnEliminarPago.setOnClickListener {
+            viewModel.resetear()
+            preRegistroViewModel.limpiarPreRegistroGuardado()
             parentFragmentManager.popBackStack()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.resetear()
+                    preRegistroViewModel.limpiarPreRegistroGuardado()
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
     }
 
     private fun cargarDetallesEnvio() {
         val preRegistro = preRegistroViewModel.preRegistroGuardado.value
-        binding.tvOrigenPresencial.text = "Trujillo"
-        binding.tvDestinoPresencial.text =
-            cotizacionViewModel.destinoSeleccionado.value ?: ""
-        binding.tvRemitentePresencial.text = preRegistro?.remitente ?: ""
-        binding.tvDestinatarioPresencial.text = preRegistro?.destinatario ?: ""
-        binding.tvCostoPresencial.text = "%.2f".format(
-            cotizacionViewModel.costoEstimado.value ?: 0.0
+        binding.tvOrigenDetalle.text = preRegistro?.encomienda?.origen ?: "Trujillo"
+        binding.tvDestinoDetalle.text = preRegistro?.encomienda?.destino ?: ""
+        binding.tvRemitenteDetalle.text = preRegistro?.remitente?.nombre ?: ""
+        binding.tvDniRemitenteDetalle.text = preRegistro?.remitente?.dni ?: ""
+        binding.tvTelefonoRemitenteDetalle.text = preRegistro?.remitente?.telefono ?: ""
+        binding.tvDireccionRemitenteDetalle.text = preRegistro?.remitente?.direccion ?: ""
+        binding.tvDestinatarioDetalle.text = preRegistro?.destinatario?.nombre ?: ""
+        binding.tvDniDestinatarioDetalle.text = preRegistro?.destinatario?.dni ?: ""
+        binding.tvTelefonoDestinatarioDetalle.text = preRegistro?.destinatario?.telefono ?: ""
+        binding.tvDireccionDestinatarioDetalle.text = preRegistro?.destinatario?.direccion ?: ""
+        binding.tvDescripcionCargaDetalle.text = preRegistro?.descripcionCarga ?: ""
+        binding.tvModoPago.text = "Pago en agencia"
+        binding.tvCostoDetalle.text = "%.2f".format(
+            preRegistro?.encomienda?.tarifa?.costo ?: 0.0
         )
-        val largo = cotizacionViewModel.largo.value ?: 0.0
-        val ancho = cotizacionViewModel.ancho.value ?: 0.0
-        val alto = cotizacionViewModel.alto.value ?: 0.0
-        binding.tvMedidasPresencial.text =
-            "%.0f × %.0f × %.0f cm".format(ancho, alto, largo)
-        binding.tvPesoPresencial.text = "%.2f".format(
-            cotizacionViewModel.peso.value ?: 0.0
-        )
+        val largo = preRegistro?.encomienda?.largo ?: 0.0
+        val ancho = preRegistro?.encomienda?.ancho ?: 0.0
+        val alto  = preRegistro?.encomienda?.alto ?: 0.0
+        binding.tvMedidasDetalle.text = "%.0f × %.0f × %.0f cm".format(ancho, alto, largo)
+        binding.tvPesoDetalle.text = "%.2f".format(preRegistro?.encomienda?.peso ?: 0.0)
     }
 
     override fun onDestroyView() {

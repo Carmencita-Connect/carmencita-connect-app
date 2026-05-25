@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.carmencita.connect.databinding.LayoutTrackingInvalidoBinding
+import com.carmencita.connect.databinding.FragmentTrackingInvalidoBinding
 import com.carmencita.connect.viewmodel.TrackingViewModel
 
 class TrackingInvalidoFragment : Fragment() {
 
-    private var _binding: LayoutTrackingInvalidoBinding? = null
+    private var _binding: FragmentTrackingInvalidoBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: TrackingViewModel by activityViewModels()
@@ -25,7 +25,7 @@ class TrackingInvalidoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = LayoutTrackingInvalidoBinding.inflate(
+        _binding = FragmentTrackingInvalidoBinding.inflate(
             inflater, container, false
         )
         return binding.root

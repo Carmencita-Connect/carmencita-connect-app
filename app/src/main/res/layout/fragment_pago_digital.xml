@@ -36,7 +36,7 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
 
-        <!-- Tarjeta de crédito/débito -->
+        <!-- Tarjeta -->
         <LinearLayout
             android:id="@+id/btnTarjeta"
             android:layout_width="match_parent"
@@ -255,6 +255,171 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- DNI Remitente / DNI Destinatario -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_dni_remitente"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvDniRemitenteDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_dni_destinatario"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvDniDestinatarioDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Teléfono Remitente / Teléfono Destinatario -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_telefono_remitente"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvTelefonoRemitenteDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_telefono_destinatario"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvTelefonoDestinatarioDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Dirección Remitente / Dirección Destinatario -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_direccion_remitente"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvDireccionRemitenteDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_direccion_destinatario"
+                        android:textColor="@color/color_letra_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tvDireccionDestinatarioDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_hint"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Descripción carga -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_descripcion_carga"
+                    android:textColor="@color/color_letra_2"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvDescripcionCargaDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_hint"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -284,7 +449,6 @@
                         android:id="@+id/tvModoPago"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pago digital"
                         android:textColor="@color/color_hint"
                         android:textSize="13sp"/>
                 </LinearLayout>
@@ -369,7 +533,7 @@
             android:textSize="13sp"
             android:visibility="gone"/>
 
-        <!-- Widget tarjeta Stripe — aparece cuando selecciona Tarjeta -->
+        <!-- Widget tarjeta Stripe -->
         <com.stripe.android.view.CardInputWidget
             android:id="@+id/cardInputWidget"
             android:layout_width="match_parent"
@@ -383,7 +547,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="12dp"
-            android:text="@string/btn_confirmar_preregistro"
+            android:text="@string/btn_confirmar_pago_digital"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -391,42 +555,20 @@
             app:cornerRadius="12dp"
             app:strokeWidth="0dp"/>
 
-        <!-- Botones Eliminar y Actualizar -->
-        <LinearLayout
+        <!-- Botón Cancelar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEliminarPago"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEliminarPago"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="@string/btn_eliminar_preregistro"
-                android:textColor="@color/color_letra_1"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/white"
-                app:cornerRadius="12dp"
-                app:strokeColor="@color/color_letra_1"
-                app:strokeWidth="1.5dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnActualizar"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:text="@string/btn_actualizar_preregistro"
-                android:textColor="@color/color_letra_1"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/white"
-                app:cornerRadius="12dp"
-                app:strokeColor="@color/color_letra_1"
-                app:strokeWidth="1.5dp"/>
-        </LinearLayout>
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/btn_cancelar_pago_digital"
+            android:textColor="@color/color_letra_1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/color_letra_1"
+            app:strokeWidth="1.5dp"/>
 
     </LinearLayout>
 </ScrollView>

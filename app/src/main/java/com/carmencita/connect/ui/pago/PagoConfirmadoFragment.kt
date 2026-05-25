@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPagoConfirmadoBinding
 import com.carmencita.connect.viewmodel.ComprobanteViewModel
-import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
 
 class PagoConfirmadoFragment : Fragment() {
@@ -36,51 +36,62 @@ class PagoConfirmadoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPagoConfirmadoBinding.inflate(
-            inflater, container, false
-        )
+        _binding = FragmentPagoConfirmadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Mostrar número de pre-registro
         arguments?.getString("numeroPR")?.let { numero ->
             binding.tvNumeroPreRegistro.text = numero
         }
 
-        // Botón Inicio — vuelve al InvitadoFragment
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // No permite volver atrás
+                }
+            }
+        )
+
         binding.btnInicio.setOnClickListener {
             viewModel.resetear()
-            parentFragmentManager.popBackStack(null,
-                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            cotizacionViewModel.resetear()
+            preRegistroViewModel.resetear()
+            parentFragmentManager.popBackStack(
+                null,
+                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
 
-        // Botón Descargar comprobante
         binding.btnDescargarComprobante.setOnClickListener {
             iniciarDescargaComprobante()
         }
     }
 
     private fun iniciarDescargaComprobante() {
-        val numeroPR = arguments?.getString("numeroPR") ?: ""
+        val pago = viewModel.pagoGenerado.value
         val preRegistro = preRegistroViewModel.preRegistroGuardado.value
+
+        if (pago == null || preRegistro == null) {
+            android.widget.Toast.makeText(
+                requireContext(),
+                "No se pudo obtener los datos del pago",
+                android.widget.Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
 
         val dialog = ComprobanteGenerandoDialog()
         dialog.isCancelable = false
         dialog.show(parentFragmentManager, "ComprobanteGenerandoDialog")
 
         comprobanteViewModel.generarComprobante(
-            context      = requireContext(),
-            numeroPR     = numeroPR,
-            remitente    = preRegistro?.remitente ?: "",
-            destinatario = preRegistro?.destinatario ?: "",
-            origen       = "Trujillo",
-            destino      = cotizacionViewModel.destinoSeleccionado.value ?: "",
-            costo        = cotizacionViewModel.costoEstimado.value ?: 0.0,
-            peso         = cotizacionViewModel.peso.value ?: 0.0,
-            metodoPago   = preRegistro?.metodoPago ?: "digital"
+            context     = requireContext(),
+            pago        = pago,
+            preRegistro = preRegistro
         )
 
         comprobanteViewModel.estado.observe(viewLifecycleOwner) { estado ->
@@ -88,8 +99,10 @@ class PagoConfirmadoFragment : Fragment() {
                 is ComprobanteViewModel.ComprobanteEstado.Descargado -> {
                     dialog.dismiss()
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.contenedorFragment,
-                            ComprobanteDescargadoFragment.newInstance(estado.numeroPR))
+                        .replace(
+                            R.id.contenedorFragment,
+                            ComprobanteDescargadoFragment.newInstance(estado.numeroPR)
+                        )
                         .addToBackStack(null)
                         .commit()
                 }

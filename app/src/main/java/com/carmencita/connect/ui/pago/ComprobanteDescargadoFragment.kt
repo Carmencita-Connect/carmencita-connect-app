@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.databinding.FragmentComprobanteDescargadoBinding
 import com.carmencita.connect.viewmodel.ComprobanteViewModel
 import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
 
 class ComprobanteDescargadoFragment : Fragment() {
@@ -17,6 +18,7 @@ class ComprobanteDescargadoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val comprobanteViewModel: ComprobanteViewModel by activityViewModels()
+    private val pagoViewModel: PagoViewModel by activityViewModels()
     private val cotizacionViewModel: CotizacionViewModel by activityViewModels()
     private val preRegistroViewModel: PreRegistroViewModel by activityViewModels()
 
@@ -44,8 +46,19 @@ class ComprobanteDescargadoFragment : Fragment() {
             binding.tvNumeroBoleta.text = numero
         }
 
+        // Deshabilitar botón atrás
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // No permite volver atrás
+                }
+            }
+        )
+
         binding.btnInicioComprobante.setOnClickListener {
             comprobanteViewModel.resetear()
+            pagoViewModel.resetear()
             cotizacionViewModel.resetear()
             preRegistroViewModel.resetear()
             parentFragmentManager.popBackStack(

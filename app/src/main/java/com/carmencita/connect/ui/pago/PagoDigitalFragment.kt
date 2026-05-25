@@ -12,7 +12,6 @@ import com.carmencita.connect.viewmodel.CotizacionViewModel
 import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
 import com.stripe.android.Stripe
-import com.stripe.android.model.PaymentMethodCreateParams
 
 class PagoDigitalFragment : Fragment() {
 
@@ -25,7 +24,6 @@ class PagoDigitalFragment : Fragment() {
 
     private var validandoDialog: PagoValidandoDialog? = null
 
-    // Stripe se inicializa lazy — después de que el contexto existe
     private val stripe by lazy {
         Stripe(requireContext(), "pk_test_51TZNAe40wQ1eY6er9ekzm9Z68jDydYtPScUWgrYwkZYyqgXz0CwVtdl7djFfmkkMKFkO6tp30X0knkfvqTa4pKzE00y6wH6Hpu")
     }
@@ -42,30 +40,16 @@ class PagoDigitalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.resetear()
         cargarDetallesEnvio()
 
-        // Botón Tarjeta
         binding.btnTarjeta.setOnClickListener {
             seleccionarMetodo("Tarjeta de crédito / débito")
-            binding.radioTarjeta.isChecked = true
-            binding.radioYape.isChecked = false
-            binding.btnTarjeta.setBackgroundResource(R.drawable.bg_metodo_pago_seleccionado)
-            binding.btnYape.setBackgroundResource(R.drawable.bg_boton_blanco)
-            binding.cardInputWidget.visibility = View.VISIBLE
         }
 
-        // Botón Yape
         binding.btnYape.setOnClickListener {
             seleccionarMetodo("Yape")
-            binding.radioTarjeta.isChecked = false
-            binding.radioYape.isChecked = true
-            binding.btnTarjeta.setBackgroundResource(R.drawable.bg_boton_blanco)
-            binding.btnYape.setBackgroundResource(R.drawable.bg_metodo_pago_seleccionado)
-            binding.cardInputWidget.visibility = View.GONE
         }
 
-        // Botón confirmar
         binding.btnConfirmar.setOnClickListener {
             val metodo = viewModel.metodoPago.value ?: ""
             if (metodo.isEmpty()) {
@@ -73,41 +57,59 @@ class PagoDigitalFragment : Fragment() {
                 binding.tvError.text = "Selecciona un método de pago"
                 return@setOnClickListener
             }
-
             if (metodo == "Tarjeta de crédito / débito") {
                 procesarTarjeta()
             } else {
-                // Yape — simular pago exitoso
                 mostrarDialog()
                 android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                    viewModel.onPagoExitoso("yape_ok")
+                    val monto = preRegistroViewModel.preRegistroGuardado.value
+                        ?.encomienda?.tarifa?.costo ?: 0.0
+                    viewModel.onPagoExitoso("yape_ok", monto)
                 }, 2000)
             }
         }
 
-        // Botón eliminar
         binding.btnEliminarPago.setOnClickListener {
             viewModel.cancelarPago()
-            cotizacionViewModel.resetear()
-            preRegistroViewModel.resetear()
-            parentFragmentManager.popBackStack(
-                null,
-                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-            )
-        }
-
-        // Botón actualizar
-        binding.btnActualizar.setOnClickListener {
+            preRegistroViewModel.limpiarPreRegistroGuardado()
             parentFragmentManager.popBackStack()
         }
 
-        // Observar estado
+        viewModel.metodoPago.observe(viewLifecycleOwner) { metodo ->
+            when (metodo) {
+                "Tarjeta de crédito / débito" -> {
+                    binding.radioTarjeta.isChecked = true
+                    binding.radioYape.isChecked = false
+                    binding.btnTarjeta.setBackgroundResource(R.drawable.bg_metodo_pago_seleccionado)
+                    binding.btnYape.setBackgroundResource(R.drawable.bg_boton_blanco)
+                    binding.cardInputWidget.visibility = View.VISIBLE
+                    binding.tvModoPago.text = metodo
+                }
+                "Yape" -> {
+                    binding.radioTarjeta.isChecked = false
+                    binding.radioYape.isChecked = true
+                    binding.btnTarjeta.setBackgroundResource(R.drawable.bg_boton_blanco)
+                    binding.btnYape.setBackgroundResource(R.drawable.bg_metodo_pago_seleccionado)
+                    binding.cardInputWidget.visibility = View.GONE
+                    binding.tvModoPago.text = metodo
+                }
+                else -> {
+                    binding.radioTarjeta.isChecked = false
+                    binding.radioYape.isChecked = false
+                    binding.btnTarjeta.setBackgroundResource(R.drawable.bg_boton_blanco)
+                    binding.btnYape.setBackgroundResource(R.drawable.bg_boton_blanco)
+                    binding.cardInputWidget.visibility = View.GONE
+                }
+            }
+        }
+
         viewModel.estado.observe(viewLifecycleOwner) { estado ->
             when (estado) {
                 is PagoViewModel.PagoEstado.Idle -> cerrarDialog()
                 is PagoViewModel.PagoEstado.Validando -> mostrarDialog()
                 is PagoViewModel.PagoEstado.Confirmado -> {
                     cerrarDialog()
+                    preRegistroViewModel.marcarComoPagado()
                     if (parentFragmentManager.findFragmentByTag("confirmado") == null) {
                         parentFragmentManager.beginTransaction()
                             .replace(
@@ -121,6 +123,7 @@ class PagoDigitalFragment : Fragment() {
                 }
                 is PagoViewModel.PagoEstado.Rechazado -> {
                     cerrarDialog()
+                    binding.cardInputWidget.clear()
                     binding.tvError.visibility = View.VISIBLE
                     binding.tvError.text = estado.mensaje
                 }
@@ -128,7 +131,6 @@ class PagoDigitalFragment : Fragment() {
             }
         }
 
-        // Observar errores
         viewModel.error.observe(viewLifecycleOwner) { mensaje ->
             if (mensaje.isNotEmpty()) {
                 binding.tvError.visibility = View.VISIBLE
@@ -137,11 +139,20 @@ class PagoDigitalFragment : Fragment() {
                 binding.tvError.visibility = View.GONE
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    preRegistroViewModel.limpiarPreRegistroGuardado()
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
     }
 
     private fun procesarTarjeta() {
-        val params: PaymentMethodCreateParams? =
-            binding.cardInputWidget.paymentMethodCreateParams
+        val params = binding.cardInputWidget.paymentMethodCreateParams
 
         if (params == null) {
             binding.tvError.visibility = View.VISIBLE
@@ -149,16 +160,19 @@ class PagoDigitalFragment : Fragment() {
             return
         }
 
+        val monto = preRegistroViewModel.preRegistroGuardado.value
+            ?.encomienda?.tarifa?.costo ?: 0.0
+
         mostrarDialog()
 
         stripe.createPaymentMethod(
             paymentMethodCreateParams = params,
             callback = object : com.stripe.android.ApiResultCallback<com.stripe.android.model.PaymentMethod> {
                 override fun onSuccess(result: com.stripe.android.model.PaymentMethod) {
-                    viewModel.onPagoExitoso(result.id ?: "stripe_ok")
+                    viewModel.onPagoExitoso(result.id ?: "stripe_ok", monto)
                 }
                 override fun onError(e: Exception) {
-                    viewModel.onPagoRechazado(e.message ?: "Error al procesar el pago")
+                    viewModel.onPagoRechazado(e.message ?: "Tarjeta rechazada por la entidad bancaria")
                 }
             }
         )
@@ -172,20 +186,26 @@ class PagoDigitalFragment : Fragment() {
 
     private fun cargarDetallesEnvio() {
         val preRegistro = preRegistroViewModel.preRegistroGuardado.value
-        binding.tvOrigenDetalle.text = "Trujillo"
-        binding.tvDestinoDetalle.text = cotizacionViewModel.destinoSeleccionado.value ?: ""
-        binding.tvRemitenteDetalle.text = preRegistro?.remitente ?: ""
-        binding.tvDestinatarioDetalle.text = preRegistro?.destinatario ?: ""
+        binding.tvOrigenDetalle.text = preRegistro?.encomienda?.origen ?: "Trujillo"
+        binding.tvDestinoDetalle.text = preRegistro?.encomienda?.destino ?: ""
+        binding.tvRemitenteDetalle.text = preRegistro?.remitente?.nombre ?: ""
+        binding.tvDniRemitenteDetalle.text = preRegistro?.remitente?.dni ?: ""
+        binding.tvTelefonoRemitenteDetalle.text = preRegistro?.remitente?.telefono ?: ""
+        binding.tvDireccionRemitenteDetalle.text = preRegistro?.remitente?.direccion ?: ""
+        binding.tvDestinatarioDetalle.text = preRegistro?.destinatario?.nombre ?: ""
+        binding.tvDniDestinatarioDetalle.text = preRegistro?.destinatario?.dni ?: ""
+        binding.tvTelefonoDestinatarioDetalle.text = preRegistro?.destinatario?.telefono ?: ""
+        binding.tvDireccionDestinatarioDetalle.text = preRegistro?.destinatario?.direccion ?: ""
+        binding.tvDescripcionCargaDetalle.text = preRegistro?.descripcionCarga ?: ""
         binding.tvCostoDetalle.text = "%.2f".format(
-            cotizacionViewModel.costoEstimado.value ?: 0.0
+            preRegistro?.encomienda?.tarifa?.costo ?: 0.0
         )
-        val largo = cotizacionViewModel.largo.value ?: 0.0
-        val ancho = cotizacionViewModel.ancho.value ?: 0.0
-        val alto = cotizacionViewModel.alto.value ?: 0.0
+        val largo = preRegistro?.encomienda?.largo ?: 0.0
+        val ancho = preRegistro?.encomienda?.ancho ?: 0.0
+        val alto  = preRegistro?.encomienda?.alto ?: 0.0
         binding.tvMedidasDetalle.text = "%.0f × %.0f × %.0f cm".format(ancho, alto, largo)
-        binding.tvPesoDetalle.text = "%.2f".format(
-            cotizacionViewModel.peso.value ?: 0.0
-        )
+        binding.tvPesoDetalle.text = "%.2f".format(preRegistro?.encomienda?.peso ?: 0.0)
+        binding.tvModoPago.text = preRegistroViewModel.metodoPago.value ?: ""
     }
 
     private fun mostrarDialog() {

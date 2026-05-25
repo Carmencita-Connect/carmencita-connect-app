@@ -26,17 +26,16 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-        <!-- Completa la información -->
+        <!-- DATOS DEL REMITENTE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:text="@string/label_completa_info"
+            android:text="@string/label_datos_remitente"
             android:textColor="@color/color_letra_1"
             android:textSize="14sp"
             android:textStyle="bold"/>
 
-        <!-- Remitente -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,12 +44,11 @@
             android:textColor="@color/color_letra_2"
             android:textSize="13sp"
             android:textStyle="bold"/>
-
         <EditText
             android:id="@+id/etRemitente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_campo_texto"
             android:hint="@string/hint_remitente"
             android:imeOptions="actionNext"
@@ -61,7 +59,87 @@
             android:textColorHint="@color/color_hint"
             android:textSize="14sp"/>
 
-        <!-- Destinatario -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_dni_remitente"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etDniRemitente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_dni_remitente"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_telefono_remitente"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etTelefonoRemitente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_telefono_remitente"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:maxLength="9"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_direccion_remitente"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etDireccionRemitente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_direccion_remitente"
+            android:imeOptions="actionNext"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <!-- DATOS DEL DESTINATARIO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/label_datos_destinatario"
+            android:textColor="@color/color_letra_1"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,15 +148,14 @@
             android:textColor="@color/color_letra_2"
             android:textSize="13sp"
             android:textStyle="bold"/>
-
         <EditText
             android:id="@+id/etDestinatario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_campo_texto"
             android:hint="@string/hint_destinatario"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:padding="14dp"
@@ -86,7 +163,103 @@
             android:textColorHint="@color/color_hint"
             android:textSize="14sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_dni_destinatario"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etDniDestinatario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_dni_destinatario"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_telefono_destinatario"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etTelefonoDestinatario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_telefono_destinatario"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:maxLength="9"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_direccion_destinatario"
+            android:textColor="@color/color_letra_2"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etDireccionDestinatario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_direccion_destinatario"
+            android:imeOptions="actionNext"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"/>
+
+        <!-- DESCRIPCIÓN DE LA CARGA -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/label_descripcion_carga"
+            android:textColor="@color/color_letra_1"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
         <!-- Selecciona modo de pago -->
+        <EditText
+            android:id="@+id/etDescripcionCarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="@string/hint_descripcion_carga"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +269,6 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
 
-        <!-- Botón Pago en agencia -->
         <LinearLayout
             android:id="@+id/btnPagoAgencia"
             android:layout_width="match_parent"
@@ -108,14 +280,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
-
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/ico_ver_agencias"
                 android:scaleType="fitCenter"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +295,6 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
-        <!-- Botón Pago digital -->
         <LinearLayout
             android:id="@+id/btnPagoDigital"
             android:layout_width="match_parent"
@@ -137,14 +306,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
-
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/ico_sol"
                 android:scaleType="fitCenter"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,7 +328,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:textColor="#E53935"
+            android:textColor="@color/color_error"
             android:textSize="13sp"
             android:visibility="gone"/>
 
@@ -179,13 +346,13 @@
             app:cornerRadius="12dp"
             app:strokeWidth="0dp"/>
 
-        <!-- Botón Eliminar pre-registro -->
+        <!-- Botón Eliminar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEliminar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="24dp"
-            android:text="@string/btn_eliminar_preregistro"
+            android:text="@string/btn_cancelar_preregistro"
             android:textColor="@color/color_letra_1"
             android:textSize="15sp"
             android:textStyle="bold"

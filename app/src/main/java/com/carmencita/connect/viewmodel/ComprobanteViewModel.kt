@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.carmencita.connect.data.ComprobanteRepository
+import com.carmencita.connect.model.Pago
+import com.carmencita.connect.model.PreRegistro
 
 class ComprobanteViewModel : ViewModel() {
 
@@ -22,40 +24,25 @@ class ComprobanteViewModel : ViewModel() {
 
     fun generarComprobante(
         context: Context,
-        numeroPR: String,
-        remitente: String,
-        destinatario: String,
-        origen: String,
-        destino: String,
-        costo: Double,
-        peso: Double,
-        metodoPago: String
+        pago: Pago,
+        preRegistro: PreRegistro
     ) {
         _estado.value = ComprobanteEstado.Generando
 
-        // Generar en hilo secundario
         Thread {
             val exito = repository.generarPDF(
-                context = context,
-                numeroPR = numeroPR,
-                remitente = remitente,
-                destinatario = destinatario,
-                origen = origen,
-                destino = destino,
-                costo = costo,
-                peso = peso,
-                metodoPago = metodoPago
+                context     = context,
+                pago        = pago,
+                preRegistro = preRegistro
             )
 
             Thread.sleep(2000)
 
             android.os.Handler(android.os.Looper.getMainLooper()).post {
                 if (exito) {
-                    _estado.value = ComprobanteEstado.Descargado(numeroPR)
+                    _estado.value = ComprobanteEstado.Descargado(pago.numeroPR)
                 } else {
-                    _estado.value = ComprobanteEstado.Error(
-                        "No se pudo generar el comprobante"
-                    )
+                    _estado.value = ComprobanteEstado.Error("No se pudo generar el comprobante")
                 }
             }
         }.start()

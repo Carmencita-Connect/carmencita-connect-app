@@ -102,6 +102,8 @@ class CotizacionFragment : Fragment() {
                 binding.etAncho.text.clear()
                 binding.etAlto.text.clear()
                 binding.etPeso.text.clear()
+                binding.spinnerOrigen.setSelection(0)
+                binding.spinnerDestino.setSelection(0)
             } else {
                 binding.layoutResultado.visibility = View.VISIBLE
                 binding.btnPreRegistro.visibility  = View.VISIBLE

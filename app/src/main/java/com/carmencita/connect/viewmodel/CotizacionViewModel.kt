@@ -3,12 +3,15 @@ package com.carmencita.connect.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.carmencita.connect.data.EncomiendaRepository
 import com.carmencita.connect.data.TarifaRepository
+import com.carmencita.connect.model.Encomienda
 import com.carmencita.connect.model.Tarifa
 
 class CotizacionViewModel : ViewModel() {
 
-    private val repository = TarifaRepository()
+    private val tarifaRepository = TarifaRepository()
+    private val encomiendaRepository = EncomiendaRepository()
 
     private val _costoEstimado = MutableLiveData<Double>()
     val costoEstimado: LiveData<Double> = _costoEstimado
@@ -34,6 +37,9 @@ class CotizacionViewModel : ViewModel() {
 
     private val _tarifa = MutableLiveData<Tarifa>()
     val tarifa: LiveData<Tarifa> = _tarifa
+
+    private val _encomiendaCotizada = MutableLiveData<Encomienda?>()
+    val encomiendaCotizada: LiveData<Encomienda?> = _encomiendaCotizada
 
     fun calcularTarifa(
         largo: String,
@@ -77,10 +83,20 @@ class CotizacionViewModel : ViewModel() {
         _peso.value  = pesoD
         _destinoSeleccionado.value = destino
 
-        val tarifa = repository.calcularTarifa(largoD, anchoD, altoD, pesoD, destino)
+        val tarifa = tarifaRepository.calcularTarifa(largoD, anchoD, altoD, pesoD, destino)
+        val encomienda = encomiendaRepository.crearCotizada(
+            largo = largoD,
+            ancho = anchoD,
+            alto = altoD,
+            peso = pesoD,
+            origen = origen,
+            destino = destino,
+            tarifa = tarifa
+        )
         _error.value = ""
         _tarifa.value = tarifa
         _costoEstimado.value = tarifa.costo
+        _encomiendaCotizada.value = encomienda
     }
 
     fun resetear() {
@@ -92,5 +108,6 @@ class CotizacionViewModel : ViewModel() {
         _alto.value = 0.0
         _peso.value = 0.0
         _tarifa.value = Tarifa()
+        _encomiendaCotizada.value = null
     }
 }

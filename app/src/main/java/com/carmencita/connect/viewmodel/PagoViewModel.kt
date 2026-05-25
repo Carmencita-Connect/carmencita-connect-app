@@ -3,8 +3,12 @@ package com.carmencita.connect.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.carmencita.connect.data.PagoRepository
+import com.carmencita.connect.model.Pago
 
 class PagoViewModel : ViewModel() {
+
+    private val repository = PagoRepository()
 
     sealed class PagoEstado {
         object Idle : PagoEstado()
@@ -23,23 +27,26 @@ class PagoViewModel : ViewModel() {
     private val _metodoPago = MutableLiveData<String>("")
     val metodoPago: LiveData<String> = _metodoPago
 
+    private val _mostrarTarjeta = MutableLiveData<Boolean>(false)
+    val mostrarTarjeta: LiveData<Boolean> = _mostrarTarjeta
+
+    // Pago generado — lo usa PagoConfirmadoFragment para el comprobante
+    private val _pagoGenerado = MutableLiveData<Pago?>()
+    val pagoGenerado: LiveData<Pago?> = _pagoGenerado
+
     fun seleccionarMetodo(metodo: String) {
         _metodoPago.value = metodo
         _error.value = ""
+        _mostrarTarjeta.value = metodo == "Tarjeta de crédito / débito"
     }
 
-    fun iniciarPago() {
-        val metodo = _metodoPago.value ?: ""
-        if (metodo.isEmpty()) {
-            _error.value = "Selecciona un método de pago"
-            return
-        }
-        _estado.value = PagoEstado.Validando
-    }
-
-    fun onPagoExitoso(token: String) {
-        val numero = "PR-2026-%07d".format((1..9999999).random())
-        _estado.value = PagoEstado.Confirmado(numero)
+    fun onPagoExitoso(token: String, monto: Double) {
+        val pago = repository.procesarPago(
+            metodo = _metodoPago.value ?: "",
+            monto  = monto
+        )
+        _pagoGenerado.value = pago
+        _estado.value = PagoEstado.Confirmado(pago.numeroPR)
     }
 
     fun onPagoRechazado(mensaje: String) {
@@ -47,19 +54,23 @@ class PagoViewModel : ViewModel() {
         _error.value = mensaje
     }
 
-    fun onPagoCancelado() {
-        _estado.value = PagoEstado.Cancelado
-    }
-
     fun cancelarPago() {
         _estado.value = PagoEstado.Cancelado
         _metodoPago.value = ""
         _error.value = ""
+        _mostrarTarjeta.value = false
+        _pagoGenerado.value = null
     }
 
     fun resetear() {
         _estado.value = PagoEstado.Idle
         _metodoPago.value = ""
         _error.value = ""
+        _mostrarTarjeta.value = false
+        _pagoGenerado.value = null
+    }
+
+    fun limpiarPreRegistroGuardado() {
+        _estado.value = PagoEstado.Idle
     }
 }

@@ -9,21 +9,17 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPreregistroBinding
 import com.carmencita.connect.viewmodel.CotizacionViewModel
+import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
 
-class PreRegistroFragment : Fragment() {
+class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
 
     private var _binding: FragmentPreregistroBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModel propio
     private val viewModel: PreRegistroViewModel by activityViewModels()
-
-    // ViewModel compartido con Cotización — para traer los datos
     private val cotizacionViewModel: CotizacionViewModel by activityViewModels()
-
-    // Método de pago seleccionado
-    private var metodoPagoSeleccionado: String = ""
+    private val pagoViewModel: PagoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,84 +32,81 @@ class PreRegistroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.resetear()
 
-        // Botón pago en agencia
         binding.btnPagoAgencia.setOnClickListener {
-            metodoPagoSeleccionado = "agencia"
-            binding.btnPagoAgencia.setBackgroundResource(
-                com.carmencita.connect.R.drawable.bg_boton_seleccionado
-            )
-            binding.btnPagoDigital.setBackgroundResource(
-                com.carmencita.connect.R.drawable.bg_boton_blanco
-            )
+            viewModel.seleccionarMetodoPago("agencia")
         }
 
-        // Botón pago digital
         binding.btnPagoDigital.setOnClickListener {
-            metodoPagoSeleccionado = "digital"
-            binding.btnPagoDigital.setBackgroundResource(
-                com.carmencita.connect.R.drawable.bg_boton_seleccionado
-            )
-            binding.btnPagoAgencia.setBackgroundResource(
-                com.carmencita.connect.R.drawable.bg_boton_blanco
-            )
+            viewModel.seleccionarMetodoPago("digital")
         }
 
-        // Botón continuar
         binding.btnContinuar.setOnClickListener {
             val imm = requireContext().getSystemService(
                 android.content.Context.INPUT_METHOD_SERVICE
             ) as android.view.inputmethod.InputMethodManager
             imm.hideSoftInputFromWindow(binding.etRemitente.windowToken, 0)
 
-            // Traer datos de cotización
-            val costo   = cotizacionViewModel.costoEstimado.value ?: 0.0
-            val destino = cotizacionViewModel.destinoSeleccionado.value ?: ""
-            val largo   = cotizacionViewModel.largo.value ?: 0.0
-            val ancho   = cotizacionViewModel.ancho.value ?: 0.0
-            val alto    = cotizacionViewModel.alto.value ?: 0.0
-            val peso    = cotizacionViewModel.peso.value ?: 0.0
+            val encomienda = cotizacionViewModel.encomiendaCotizada.value
 
             viewModel.guardarPreRegistro(
-                remitente      = binding.etRemitente.text.toString().trim(),
-                destinatario   = binding.etDestinatario.text.toString().trim(),
-                metodoPago     = metodoPagoSeleccionado,
-                destino        = destino,
-                largo          = largo,
-                ancho          = ancho,
-                alto           = alto,
-                peso           = peso,
-                costoEstimado  = costo
+                nombreRemitente       = binding.etRemitente.text.toString().trim(),
+                dniRemitente          = binding.etDniRemitente.text.toString().trim(),
+                telefonoRemitente     = binding.etTelefonoRemitente.text.toString().trim(),
+                direccionRemitente    = binding.etDireccionRemitente.text.toString().trim(),
+                nombreDestinatario    = binding.etDestinatario.text.toString().trim(),
+                dniDestinatario       = binding.etDniDestinatario.text.toString().trim(),
+                telefonoDestinatario  = binding.etTelefonoDestinatario.text.toString().trim(),
+                direccionDestinatario = binding.etDireccionDestinatario.text.toString().trim(),
+                descripcionCarga      = binding.etDescripcionCarga.text.toString().trim(),
+                encomienda            = encomienda
             )
         }
 
-        // Botón eliminar
         binding.btnEliminar.setOnClickListener {
-            cotizacionViewModel.resetear()
-            parentFragmentManager.popBackStack()
+            ConfirmarCancelarDialog()
+                .show(childFragmentManager, "ConfirmarCancelarDialog")
         }
 
-        // Observar resultado
-        viewModel.preRegistroGuardado.observe(viewLifecycleOwner) { preRegistro ->
-            preRegistro ?: return@observe
-
-            if (metodoPagoSeleccionado == "digital") {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.contenedorFragment,
-                        com.carmencita.connect.ui.pago.PagoDigitalFragment())
-                    .addToBackStack(null)
-                    .commit()
-            } else if (metodoPagoSeleccionado == "agencia") {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.contenedorFragment,
-                        com.carmencita.connect.ui.pago.PagoPresencialFragment())
-                    .addToBackStack(null)
-                    .commit()
+        viewModel.metodoPago.observe(viewLifecycleOwner) { metodo ->
+            when (metodo) {
+                "agencia" -> {
+                    binding.btnPagoAgencia.setBackgroundResource(R.drawable.bg_boton_seleccionado)
+                    binding.btnPagoDigital.setBackgroundResource(R.drawable.bg_boton_blanco)
+                }
+                "digital" -> {
+                    binding.btnPagoDigital.setBackgroundResource(R.drawable.bg_boton_seleccionado)
+                    binding.btnPagoAgencia.setBackgroundResource(R.drawable.bg_boton_blanco)
+                }
+                else -> {
+                    binding.btnPagoAgencia.setBackgroundResource(R.drawable.bg_boton_blanco)
+                    binding.btnPagoDigital.setBackgroundResource(R.drawable.bg_boton_blanco)
+                }
             }
         }
 
-        // Observar errores
+        viewModel.preRegistroGuardado.observe(viewLifecycleOwner) { preRegistro ->
+            preRegistro ?: return@observe
+            when (viewModel.metodoPago.value) {
+                "digital" -> {
+                    pagoViewModel.resetear()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.contenedorFragment,
+                            com.carmencita.connect.ui.pago.PagoDigitalFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                "agencia" -> {
+                    pagoViewModel.resetear()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.contenedorFragment,
+                            com.carmencita.connect.ui.pago.PagoPresencialFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+        }
+
         viewModel.error.observe(viewLifecycleOwner) { mensaje ->
             if (mensaje.isNotEmpty()) {
                 binding.tvError.visibility = View.VISIBLE
@@ -122,6 +115,23 @@ class PreRegistroFragment : Fragment() {
                 binding.tvError.visibility = View.GONE
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : androidx.activity.OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.resetear()
+                    cotizacionViewModel.resetear()
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
+    }
+
+    override fun onConfirmarCancelacion() {
+        viewModel.resetear()
+        cotizacionViewModel.resetear()
+        parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {
