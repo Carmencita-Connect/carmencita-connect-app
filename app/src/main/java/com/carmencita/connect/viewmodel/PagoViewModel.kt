@@ -30,7 +30,7 @@ class PagoViewModel : ViewModel() {
     private val _mostrarTarjeta = MutableLiveData<Boolean>(false)
     val mostrarTarjeta: LiveData<Boolean> = _mostrarTarjeta
 
-    // Pago generado — lo usa PagoConfirmadoFragment para el comprobante
+    // Pago generado
     private val _pagoGenerado = MutableLiveData<Pago?>()
     val pagoGenerado: LiveData<Pago?> = _pagoGenerado
 
@@ -70,7 +70,4 @@ class PagoViewModel : ViewModel() {
         _pagoGenerado.value = null
     }
 
-    fun limpiarPreRegistroGuardado() {
-        _estado.value = PagoEstado.Idle
-    }
 }

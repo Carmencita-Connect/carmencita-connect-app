@@ -52,7 +52,6 @@ class PagoPresencialConfirmadoFragment : Fragment() {
             viewLifecycleOwner,
             object : androidx.activity.OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    // No permite volver atrás
                 }
             }
         )
