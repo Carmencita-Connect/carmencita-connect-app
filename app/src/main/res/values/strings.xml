@@ -30,7 +30,6 @@
     <string name="label_ancho_caja">Ancho</string>
     <string name="label_largo_caja">Largo</string>
 
-
     <string name="titulo_tracking">Rastrea tu envío</string>
     <string name="label_numero_guia">Número de guía</string>
     <string name="hint_guia">Ej. C0000000001</string>
@@ -80,6 +79,9 @@
     <string name="titulo_pago_digital">Pago digital</string>
     <string name="label_selecciona_metodo">Selecciona tu método de pago</string>
     <string name="metodo_tarjeta">Tarjeta de crédito / débito</string>
+    <string name="label_visa">VISA</string>
+    <string name="label_mc">MC</string>
+    <string name="label_amex">AMEX</string>
     <string name="metodo_yape">Yape</string>
     <string name="metodo_transferencia">Transferencia bancaria</string>
     <string name="label_detalles_envio">Detalles del envío</string>
@@ -113,6 +115,7 @@
     <string name="comprobante_exitoso">¡Comprobante descargado con éxito!</string>
     <string name="btn_inicio_comprobante">Inicio</string>
     <string name="label_numero_boleta">Número de pre registro</string>
+    <string name="icono_check">✓</string>
 
     <!-- Dialog confirmar cancelar -->
     <string name="dialog_titulo_cancelar">Cancelar pre-registro</string>

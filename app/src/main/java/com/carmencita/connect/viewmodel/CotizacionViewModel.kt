@@ -12,7 +12,6 @@ class CotizacionViewModel : ViewModel() {
 
     private val tarifaRepository = TarifaRepository()
     private val encomiendaRepository = EncomiendaRepository()
-
     private val _costoEstimado = MutableLiveData<Double>()
     val costoEstimado: LiveData<Double> = _costoEstimado
 

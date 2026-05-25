@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.carmencita.connect.databinding.FragmentCotizacionBinding
 import com.carmencita.connect.viewmodel.CotizacionViewModel
 import com.carmencita.connect.R

@@ -31,7 +31,7 @@ class InvitadoFragment : Fragment() {
 
         // Botón Ver agencias
         binding.btnVerAgencias.setOnClickListener {
-            // TODO: navegar a agencias
+            // navegar a agencias
         }
 
         // Botón Tracking
