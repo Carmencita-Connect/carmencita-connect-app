@@ -2,7 +2,7 @@ package com.carmencita.connect
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.carmencita.connect.ui.invitado.InvitadoFragment
+import com.carmencita.connect.ui.auth.LoginFragment
 import com.stripe.android.PaymentConfiguration
 
 class MainActivity : AppCompatActivity() {
@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity() {
             "pk_test_51TZNAe40wQ1eY6er9ekzm9Z68jDydYtPScUWgrYwkZYyqgXz0CwVtdl7djFfmkkMKFkO6tp30X0knkfvqTa4pKzE00y6wH6Hpu"
         )
 
-        // Carga InvitadoFragment al iniciar
+        // Carga LoginFragment al iniciar.
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.contenedorFragment, InvitadoFragment())
+                .replace(R.id.contenedorFragment, LoginFragment())
                 .commit()
         }
     }

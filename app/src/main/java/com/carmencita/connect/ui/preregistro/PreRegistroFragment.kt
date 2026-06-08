@@ -10,7 +10,9 @@ import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPreregistroBinding
 import com.carmencita.connect.viewmodel.CotizacionViewModel
 import com.carmencita.connect.viewmodel.PagoViewModel
+import com.carmencita.connect.viewmodel.PerfilViewModel
 import com.carmencita.connect.viewmodel.PreRegistroViewModel
+import com.carmencita.connect.viewmodel.SesionViewModel
 
 class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
 
@@ -20,6 +22,9 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
     private val viewModel: PreRegistroViewModel by activityViewModels()
     private val cotizacionViewModel: CotizacionViewModel by activityViewModels()
     private val pagoViewModel: PagoViewModel by activityViewModels()
+    private val perfilViewModel: PerfilViewModel by activityViewModels()
+    private val sesionViewModel: SesionViewModel by activityViewModels()
+    private var autocompletarSolicitado = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +37,12 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sesionViewModel.cargarSesion()
+
+        binding.btnUsarMisDatos.setOnClickListener {
+            autocompletarSolicitado = true
+            perfilViewModel.cargarPerfil()
+        }
 
         binding.btnPagoAgencia.setOnClickListener {
             viewModel.seleccionarMetodoPago("agencia")
@@ -82,6 +93,27 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
                     binding.btnPagoAgencia.setBackgroundResource(R.drawable.bg_boton_blanco)
                     binding.btnPagoDigital.setBackgroundResource(R.drawable.bg_boton_blanco)
                 }
+            }
+        }
+
+        sesionViewModel.sesionActiva.observe(viewLifecycleOwner) { activa ->
+            binding.btnUsarMisDatos.visibility = if (activa) View.VISIBLE else View.GONE
+        }
+
+        perfilViewModel.persona.observe(viewLifecycleOwner) { persona ->
+            persona ?: return@observe
+            if (!autocompletarSolicitado) return@observe
+            binding.etRemitente.setText(persona.nombre)
+            binding.etDniRemitente.setText(persona.dni)
+            binding.etTelefonoRemitente.setText(persona.telefono)
+            binding.etDireccionRemitente.setText(persona.direccion)
+            autocompletarSolicitado = false
+        }
+
+        perfilViewModel.error.observe(viewLifecycleOwner) { mensaje ->
+            if (mensaje.isNotBlank()) {
+                binding.tvError.visibility = View.VISIBLE
+                binding.tvError.text = mensaje
             }
         }
 
