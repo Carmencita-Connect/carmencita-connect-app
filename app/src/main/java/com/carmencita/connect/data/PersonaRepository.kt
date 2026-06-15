@@ -2,11 +2,12 @@ package com.carmencita.connect.data
 
 import android.content.Context
 import com.carmencita.connect.model.Persona
-import org.json.JSONObject
 
 class PersonaRepository(context: Context) {
 
-    private val sesionRepository = SesionRepository(context)
+    private val database = AppDatabase.obtener(context)
+    private val personaDao = database.personaDao()
+    private val sesionDao = database.sesionDao()
 
     data class PersonaResult(
         val exitoso: Boolean,
@@ -15,55 +16,34 @@ class PersonaRepository(context: Context) {
     )
 
     fun obtenerPersonaActual(): PersonaResult {
-        val token = sesionRepository.obtenerToken()
-        if (token.isBlank()) {
-            return PersonaResult(false, "No hay una sesión activa")
-        }
+        val sesion = sesionDao.obtenerActiva()
+            ?: return PersonaResult(false, "No hay una sesión activa")
 
-        val response = ApiClient.get("/api/personas/me", token)
-        if (!response.isSuccessful) {
-            return PersonaResult(
-                exitoso = false,
-                mensaje = ApiJsonMapper.errorMessage(
-                    response.body,
-                    "No se pudo cargar el perfil"
-                )
-            )
-        }
+        val persona = personaDao.obtenerPorId(sesion.personaId)
+            ?: return PersonaResult(false, "No se encontró el perfil del usuario")
 
-        val json = JSONObject(response.body)
         return PersonaResult(
             exitoso = true,
-            persona = ApiJsonMapper.personaFromJson(json.getJSONObject("persona"))
+            persona = persona.toModel()
         )
     }
 
     fun actualizarTelefono(telefono: String): PersonaResult {
-        val token = sesionRepository.obtenerToken()
-        if (token.isBlank()) {
-            return PersonaResult(false, "No hay una sesión activa")
+        val sesion = sesionDao.obtenerActiva()
+            ?: return PersonaResult(false, "No hay una sesión activa")
+
+        val filas = personaDao.actualizarTelefono(sesion.personaId, telefono)
+        if (filas == 0) {
+            return PersonaResult(false, "No se pudo actualizar el perfil")
         }
 
-        val body = JSONObject()
-            .put("telefono", telefono)
-            .toString()
+        val personaActualizada = personaDao.obtenerPorId(sesion.personaId)
+            ?: return PersonaResult(false, "No se encontró el perfil del usuario")
 
-        val response = ApiClient.patch("/api/personas/me", body, token)
-        if (!response.isSuccessful) {
-            return PersonaResult(
-                exitoso = false,
-                mensaje = ApiJsonMapper.errorMessage(
-                    response.body,
-                    "No se pudo actualizar el perfil"
-                )
-            )
-        }
-
-        val json = JSONObject(response.body)
         return PersonaResult(
             exitoso = true,
             mensaje = "Datos actualizados correctamente",
-            persona = ApiJsonMapper.personaFromJson(json.getJSONObject("persona"))
+            persona = personaActualizada.toModel()
         )
     }
 }

@@ -10,6 +10,7 @@ import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentLoginBinding
 import com.carmencita.connect.ui.invitado.InvitadoFragment
 import com.carmencita.connect.viewmodel.LoginViewModel
+import com.carmencita.connect.viewmodel.PerfilViewModel
 import com.carmencita.connect.viewmodel.SesionViewModel
 
 class LoginFragment : Fragment() {
@@ -19,6 +20,7 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by activityViewModels()
     private val sesionViewModel: SesionViewModel by activityViewModels()
+    private val perfilViewModel: PerfilViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +50,8 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnInvitado.setOnClickListener {
+            sesionViewModel.entrarComoInvitado()
+            perfilViewModel.limpiarPerfil()
             navegarInicio()
         }
 

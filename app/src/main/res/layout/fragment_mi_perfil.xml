@@ -10,25 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="32dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="28dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="14dp"
             android:background="@drawable/bg_boton_titulo"
             android:gravity="center"
-            android:padding="14dp"
+            android:padding="10dp"
             android:text="Mi Perfil"
             android:textColor="@color/color_letra_2"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="220dp"
-            android:layout_height="120dp"
+            android:layout_width="190dp"
+            android:layout_height="95dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="12dp"
             android:contentDescription="@string/app_name"
             android:scaleType="fitCenter"
             android:src="@drawable/img_logo" />
@@ -36,53 +41,65 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="Nombre completo"
             android:textColor="@color/color_letra_1"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_campo_texto"
-            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="@color/color_letra_2"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DNI"
             android:textColor="@color/color_letra_1"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDni"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_campo_texto"
-            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="@color/color_letra_2"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Teléfono"
             android:textColor="@color/color_letra_1"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTelefono"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="18dp"
             android:background="@drawable/bg_campo_texto"
-            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="@color/color_letra_2"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tvError"
@@ -96,35 +113,35 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditarPerfil"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="12dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
             android:text="Editar perfil"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:backgroundTint="@color/color_letra_1"
-            app:cornerRadius="12dp" />
+            app:cornerRadius="4dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesion"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="12dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
             android:text="Cerrar sesión"
             android:textColor="@color/color_letra_1"
             android:textStyle="bold"
             app:backgroundTint="@color/white"
-            app:cornerRadius="12dp"
+            app:cornerRadius="4dp"
             app:strokeColor="@color/color_letra_1"
             app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolver"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:text="Volver"
             android:textColor="@color/color_letra_2"
             app:backgroundTint="@color/white"
-            app:cornerRadius="12dp"
+            app:cornerRadius="4dp"
             app:strokeColor="@color/color_letra_2"
             app:strokeWidth="1dp" />
 

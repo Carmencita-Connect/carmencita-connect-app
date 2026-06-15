@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.carmencita.connect.data.AuthRepository
+import com.carmencita.connect.data.validation.AuthValidator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,12 +25,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val cargando: LiveData<Boolean> = _cargando
 
     fun iniciarSesion(correo: String, password: String) {
-        if (correo.isBlank() || password.isBlank()) {
-            _error.value = "Ingresa correo y contraseña"
-            return
-        }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            _error.value = "Ingresa un correo válido"
+        val validacion = AuthValidator.validarLogin(correo, password)
+        if (validacion.isNotBlank()) {
+            _error.value = validacion
             return
         }
 
@@ -49,7 +47,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     _error.value = authResult.mensaje
                 }
             }.onFailure {
-                _error.value = "No se pudo conectar con el servidor"
+                _error.value = "No se pudo iniciar sesión"
             }
         }
     }

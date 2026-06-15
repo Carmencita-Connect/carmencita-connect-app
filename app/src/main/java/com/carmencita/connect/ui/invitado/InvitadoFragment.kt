@@ -47,6 +47,7 @@ class InvitadoFragment : Fragment() {
 
         binding.btnCerrarSesion.setOnClickListener {
             sesionViewModel.cerrarSesion()
+            perfilViewModel.limpiarPerfil()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, LoginFragment())
                 .commit()
@@ -89,7 +90,7 @@ class InvitadoFragment : Fragment() {
 
         perfilViewModel.persona.observe(viewLifecycleOwner) { persona ->
             val nombre = persona?.nombre.orEmpty().trim()
-            if (nombre.isNotBlank()) {
+            if (sesionViewModel.sesionActiva.value == true && nombre.isNotBlank()) {
                 binding.tvTituloInicio.text = "Hola, $nombre"
             }
         }

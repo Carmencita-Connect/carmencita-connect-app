@@ -43,6 +43,7 @@ class MiPerfilFragment : Fragment() {
 
         binding.btnCerrarSesion.setOnClickListener {
             sesionViewModel.cerrarSesion()
+            perfilViewModel.limpiarPerfil()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, LoginFragment())
                 .commit()

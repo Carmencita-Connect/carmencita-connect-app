@@ -44,6 +44,14 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
+        <!-- Imagen camión -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:src="@drawable/img_transporte_cc"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
         <LinearLayout
             android:id="@+id/btnMiPerfil"
             android:layout_width="match_parent"
@@ -72,14 +80,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
         </LinearLayout>
-
-        <!-- Imagen camión -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:src="@drawable/img_transporte_cc"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="16dp"/>
 
         <!-- Botón Ver agencias -->
         <LinearLayout

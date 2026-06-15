@@ -16,19 +16,34 @@ class SesionViewModel(application: Application) : AndroidViewModel(application) 
     private val sesionRepository = SesionRepository(application)
     private val authRepository = AuthRepository(application)
 
-    private val _sesionActiva = MutableLiveData<Boolean>(sesionRepository.haySesionActiva())
+    private val _sesionActiva = MutableLiveData<Boolean>(false)
     val sesionActiva: LiveData<Boolean> = _sesionActiva
 
     fun cargarSesion() {
-        _sesionActiva.value = sesionRepository.haySesionActiva()
+        viewModelScope.launch {
+            val activa = withContext(Dispatchers.IO) {
+                sesionRepository.haySesionActiva()
+            }
+            _sesionActiva.value = activa
+        }
     }
 
     fun cerrarSesion() {
+        _sesionActiva.value = false
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 authRepository.cerrarSesion()
             }
             _sesionActiva.value = false
+        }
+    }
+
+    fun entrarComoInvitado() {
+        _sesionActiva.value = false
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                authRepository.cerrarSesion()
+            }
         }
     }
 }

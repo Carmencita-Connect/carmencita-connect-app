@@ -42,7 +42,7 @@ class PerfilViewModel(application: Application) : AndroidViewModel(application) 
                     _error.value = personaResult.mensaje
                 }
             }.onFailure {
-                _error.value = "No se pudo conectar con el servidor"
+                _error.value = "No se pudo cargar el perfil"
             }
         }
     }
@@ -68,9 +68,14 @@ class PerfilViewModel(application: Application) : AndroidViewModel(application) 
                     _error.value = personaResult.mensaje
                 }
             }.onFailure {
-                _error.value = "No se pudo conectar con el servidor"
+                _error.value = "No se pudo actualizar el perfil"
             }
         }
+    }
+
+    fun limpiarPerfil() {
+        _persona.value = null
+        limpiarMensajes()
     }
 
     fun limpiarMensajes() {

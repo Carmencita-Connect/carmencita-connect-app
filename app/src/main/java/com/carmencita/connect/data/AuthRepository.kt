@@ -1,13 +1,20 @@
 package com.carmencita.connect.data
 
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
+import com.carmencita.connect.data.local.CredencialEntity
+import com.carmencita.connect.data.local.SesionEntity
+import com.carmencita.connect.data.local.toEntity
+import com.carmencita.connect.data.security.PasswordHasher
 import com.carmencita.connect.model.Persona
 import com.carmencita.connect.model.Sesion
-import org.json.JSONObject
 
 class AuthRepository(context: Context) {
 
-    private val sesionRepository = SesionRepository(context)
+    private val database = AppDatabase.obtener(context)
+    private val personaDao = database.personaDao()
+    private val credencialDao = database.credencialDao()
+    private val sesionDao = database.sesionDao()
 
     data class AuthResult(
         val exitoso: Boolean,
@@ -21,71 +28,86 @@ class AuthRepository(context: Context) {
         correo: String,
         password: String
     ): AuthResult {
-        val body = JSONObject()
-            .put("nombre", persona.nombre)
-            .put("dni", persona.dni)
-            .put("telefono", persona.telefono)
-            .put("direccion", persona.direccion)
-            .put("correo", correo)
-            .put("password", password)
-            .toString()
+        val correoNormalizado = correo.trim().lowercase()
+        if (credencialDao.obtenerPorCorreo(correoNormalizado) != null) {
+            return AuthResult(false, "El correo ya está registrado")
+        }
+        if (personaDao.obtenerPorDni(persona.dni.trim()) != null) {
+            return AuthResult(false, "El DNI ya está registrado")
+        }
 
-        return ejecutarAutenticacion(
-            response = ApiClient.post("/api/auth/register", body),
-            correo = correo
-        )
+        return try {
+            var personaId = 0L
+            val salt = PasswordHasher.generarSalt()
+            val hash = PasswordHasher.hash(password, salt)
+            database.runInTransaction {
+                personaId = personaDao.insertar(persona.toEntity())
+                credencialDao.insertar(
+                    CredencialEntity(
+                        personaId = personaId,
+                        correo = correoNormalizado,
+                        passwordHash = hash,
+                        salt = salt
+                    )
+                )
+                sesionDao.cerrarTodas()
+                sesionDao.guardar(
+                    SesionEntity(
+                        personaId = personaId,
+                        correo = correoNormalizado,
+                        activa = true
+                    )
+                )
+            }
+            AuthResult(
+                exitoso = true,
+                persona = persona,
+                sesion = Sesion(
+                    token = personaId.toString(),
+                    correo = correoNormalizado,
+                    activa = true
+                )
+            )
+        } catch (ex: SQLiteConstraintException) {
+            AuthResult(false, "El correo o DNI ya está registrado")
+        } catch (ex: Exception) {
+            AuthResult(false, "No se pudo registrar el usuario")
+        }
     }
 
     fun iniciarSesion(correo: String, password: String): AuthResult {
-        val body = JSONObject()
-            .put("correo", correo)
-            .put("password", password)
-            .toString()
+        val correoNormalizado = correo.trim().lowercase()
+        val credencial = credencialDao.obtenerPorCorreo(correoNormalizado)
+            ?: return AuthResult(false, "Correo o contraseña incorrectos")
 
-        return ejecutarAutenticacion(
-            response = ApiClient.post("/api/auth/login", body),
-            correo = correo
+        if (!PasswordHasher.verificar(password, credencial.salt, credencial.passwordHash)) {
+            return AuthResult(false, "Correo o contraseña incorrectos")
+        }
+
+        val persona = personaDao.obtenerPorId(credencial.personaId)
+            ?: return AuthResult(false, "No se encontró el perfil del usuario")
+
+        sesionDao.cerrarTodas()
+        sesionDao.guardar(
+            SesionEntity(
+                personaId = credencial.personaId,
+                correo = correoNormalizado,
+                activa = true
+            )
+        )
+
+        return AuthResult(
+            exitoso = true,
+            persona = persona.toModel(),
+            sesion = Sesion(
+                token = credencial.personaId.toString(),
+                correo = correoNormalizado,
+                activa = true
+            )
         )
     }
 
     fun cerrarSesion() {
-        val token = sesionRepository.obtenerToken()
-        if (token.isNotBlank()) {
-            runCatching {
-                ApiClient.post("/api/auth/logout", "{}", token)
-            }
-        }
-        sesionRepository.cerrarSesionLocal()
-    }
-
-    private fun ejecutarAutenticacion(
-        response: ApiClient.ApiResponse,
-        correo: String
-    ): AuthResult {
-        if (!response.isSuccessful) {
-            return AuthResult(
-                exitoso = false,
-                mensaje = ApiJsonMapper.errorMessage(
-                    response.body,
-                    "No se pudo completar la operación"
-                )
-            )
-        }
-
-        val json = JSONObject(response.body)
-        val token = json.optString("token")
-        val persona = ApiJsonMapper.personaFromJson(json.getJSONObject("persona"))
-        val sesion = Sesion(
-            token = token,
-            correo = correo,
-            activa = token.isNotBlank()
-        )
-
-        sesionRepository.guardarSesion(sesion)
-        return AuthResult(
-            exitoso = true,
-            persona = persona,
-            sesion = sesion
-        )
+        sesionDao.cerrarTodas()
     }
 }
