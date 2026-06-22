@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp">
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="125dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Regístrate"
+            android:textColor="@color/color_letra_2"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Nombre completo"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Ingresa tu nombre completo"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="DNI"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etDni"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Ingresa tu DNI"
+            android:inputType="number"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Teléfono"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Ingresa tu teléfono"
+            android:inputType="phone"
+            android:maxLength="9"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Correo electrónico"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Ingresa correo electrónico"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Contraseña"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Ingresa tu contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Confirmar contraseña"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etConfirmarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:hint="Confirma tu contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:textColor="@color/color_error"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="20dp"
+            android:text="Registrarte"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_letra_1"
+            app:cornerRadius="12dp"
+            app:strokeWidth="0dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Ya tienes cuenta? "
+                android:textColor="@color/color_hint"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvIniciaSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicia sesión"
+                android:textColor="@color/color_letra_1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
