@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="28dp"
+        android:paddingTop="80dp"
+        android:paddingEnd="28dp"
+        android:paddingBottom="32dp">
+
+        <ImageView
+            android:layout_width="190dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Confirmación de correo"
+            android:textColor="@color/color_letra_2"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCorreoDestino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:textColor="@color/color_letra_2"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Ingresa el código de 6 dígitos"
+            android:textColor="@color/color_letra_2"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etCodigo1"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCodigo2"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCodigo3"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCodigo4"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCodigo5"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCodigo6"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_texto"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/color_letra_2"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/color_error"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvMensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:textColor="@color/color_letra_1"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmarCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="Confirmar código"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_letra_1"
+            app:cornerRadius="8dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿No te llegó el código? "
+                android:textColor="@color/color_hint"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvReenviarCodigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Reenviar código"
+                android:textColor="@color/color_letra_1"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvVolverRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Volver al registro"
+            android:textColor="@color/color_letra_2"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>

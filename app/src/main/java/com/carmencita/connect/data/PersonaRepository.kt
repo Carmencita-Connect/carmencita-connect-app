@@ -7,7 +7,7 @@ class PersonaRepository(context: Context) {
 
     private val database = AppDatabase.obtener(context)
     private val personaDao = database.personaDao()
-    private val sesionDao = database.sesionDao()
+    private val sesionRepository = SesionRepository(context)
 
     data class PersonaResult(
         val exitoso: Boolean,
@@ -16,10 +16,10 @@ class PersonaRepository(context: Context) {
     )
 
     fun obtenerPersonaActual(): PersonaResult {
-        val sesion = sesionDao.obtenerActiva()
+        val personaId = sesionRepository.obtenerPersonaId()
             ?: return PersonaResult(false, "No hay una sesión activa")
 
-        val persona = personaDao.obtenerPorId(sesion.personaId)
+        val persona = personaDao.obtenerPorId(personaId)
             ?: return PersonaResult(false, "No se encontró el perfil del usuario")
 
         return PersonaResult(
@@ -29,15 +29,15 @@ class PersonaRepository(context: Context) {
     }
 
     fun actualizarTelefono(telefono: String): PersonaResult {
-        val sesion = sesionDao.obtenerActiva()
+        val personaId = sesionRepository.obtenerPersonaId()
             ?: return PersonaResult(false, "No hay una sesión activa")
 
-        val filas = personaDao.actualizarTelefono(sesion.personaId, telefono)
+        val filas = personaDao.actualizarTelefono(personaId, telefono)
         if (filas == 0) {
             return PersonaResult(false, "No se pudo actualizar el perfil")
         }
 
-        val personaActualizada = personaDao.obtenerPorId(sesion.personaId)
+        val personaActualizada = personaDao.obtenerPorId(personaId)
             ?: return PersonaResult(false, "No se encontró el perfil del usuario")
 
         return PersonaResult(

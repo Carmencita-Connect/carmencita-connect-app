@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentRegistroBinding
-import com.carmencita.connect.ui.invitado.InvitadoFragment
 import com.carmencita.connect.viewmodel.RegistroViewModel
-import com.carmencita.connect.viewmodel.SesionViewModel
 
 class RegistroFragment : Fragment() {
 
@@ -18,7 +16,6 @@ class RegistroFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val registroViewModel: RegistroViewModel by activityViewModels()
-    private val sesionViewModel: SesionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +30,7 @@ class RegistroFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegistrarse.setOnClickListener {
-            registroViewModel.registrar(
+            registroViewModel.solicitarCodigo(
                 nombre = binding.etNombre.text.toString(),
                 dni = binding.etDni.text.toString(),
                 telefono = binding.etTelefono.text.toString(),
@@ -48,12 +45,12 @@ class RegistroFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
-        registroViewModel.registroExitoso.observe(viewLifecycleOwner) { exitoso ->
-            if (exitoso) {
-                sesionViewModel.cargarSesion()
-                registroViewModel.limpiarEstado()
+        registroViewModel.codigoEnviado.observe(viewLifecycleOwner) { enviado ->
+            if (enviado) {
+                registroViewModel.marcarCodigoEnviadoAtendido()
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.contenedorFragment, InvitadoFragment())
+                    .replace(R.id.contenedorFragment, ConfirmacionCorreoFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         }
@@ -65,7 +62,7 @@ class RegistroFragment : Fragment() {
         registroViewModel.cargando.observe(viewLifecycleOwner) { cargando ->
             binding.btnRegistrarse.isEnabled = !cargando
             binding.tvIniciaSesion.isEnabled = !cargando
-            binding.btnRegistrarse.text = if (cargando) "Registrando..." else "Registrarte"
+            binding.btnRegistrarse.text = if (cargando) "Enviando código..." else "Registrarte"
         }
     }
 

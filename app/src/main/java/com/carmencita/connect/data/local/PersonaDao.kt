@@ -16,6 +16,9 @@ interface PersonaDao {
     @Query("SELECT * FROM personas WHERE dni = :dni LIMIT 1")
     fun obtenerPorDni(dni: String): PersonaEntity?
 
+    @Query("SELECT * FROM personas WHERE correo = :correo LIMIT 1")
+    fun obtenerPorCorreo(correo: String): PersonaEntity?
+
     @Query("UPDATE personas SET telefono = :telefono WHERE id = :id")
     fun actualizarTelefono(id: Long, telefono: String): Int
 }
