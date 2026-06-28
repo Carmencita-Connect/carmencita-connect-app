@@ -9,6 +9,12 @@
     <string name="texto_ayuda">¿Necesitas ayuda?</string>
     <string name="texto_llamar">Llamar ahora</string>
 
+    <!-- HU-13 Sedes -->
+    <string name="titulo_sedes">Directorio de agencias</string>
+    <string name="subtitulo_sedes">Conoce nuestras agencias</string>
+    <string name="descripcion_icono_agencia">Agencia</string>
+    <string name="descripcion_abrir_ubicacion">Abrir ubicacion de la agencia</string>
+
     <string name="titulo_cotizar">Cotiza tu envío</string>
     <string name="label_medidas">Ingresa las medidas de tu paquete</string>
     <string name="label_largo">Largo (cm)</string>
