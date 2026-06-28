@@ -4,19 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.carmencita.connect.data.local.EncomiendaDao
+import com.carmencita.connect.data.local.EncomiendaEntity
 import com.carmencita.connect.data.local.PersonaDao
 import com.carmencita.connect.data.local.PersonaEntity
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [PersonaEntity::class],
-    version = 2,
+    entities = [PersonaEntity::class, EncomiendaEntity::class],
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun personaDao(): PersonaDao
+    abstract fun encomiendaDao(): EncomiendaDao
 
     companion object {
         @Volatile
@@ -29,7 +32,8 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "carmencita_local.db"
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addCallback(CREAR_DATOS_INICIALES)
                     .build()
                     .also { INSTANCE = it }
             }
@@ -72,6 +76,90 @@ abstract class AppDatabase : RoomDatabase() {
                 database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_personas_dni ON personas(dni)")
                 database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_personas_correo ON personas(correo)")
             }
+        }
+
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                crearTablaEncomiendas(database)
+                insertarEncomiendasPrueba(database)
+            }
+        }
+
+        private val CREAR_DATOS_INICIALES = object : RoomDatabase.Callback() {
+            override fun onCreate(database: SupportSQLiteDatabase) {
+                super.onCreate(database)
+                insertarEncomiendasPrueba(database)
+            }
+        }
+
+        private fun crearTablaEncomiendas(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS encomiendas (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    numeroGuia TEXT NOT NULL,
+                    largo REAL NOT NULL,
+                    ancho REAL NOT NULL,
+                    alto REAL NOT NULL,
+                    peso REAL NOT NULL,
+                    origen TEXT NOT NULL,
+                    destino TEXT NOT NULL,
+                    tarifaDestino TEXT NOT NULL,
+                    tarifaCosto REAL NOT NULL,
+                    estado TEXT NOT NULL,
+                    fechaRegistro TEXT,
+                    fechaTransito TEXT,
+                    fechaAgencia TEXT,
+                    fechaEntrega TEXT
+                )
+                """.trimIndent()
+            )
+            database.execSQL(
+                "CREATE UNIQUE INDEX IF NOT EXISTS index_encomiendas_numeroGuia " +
+                    "ON encomiendas(numeroGuia)"
+            )
+        }
+
+        private fun insertarEncomiendasPrueba(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                INSERT OR IGNORE INTO encomiendas (
+                    id, numeroGuia, largo, ancho, alto, peso, origen, destino,
+                    tarifaDestino, tarifaCosto, estado, fechaRegistro,
+                    fechaTransito, fechaAgencia, fechaEntrega
+                ) VALUES (
+                    1, 'C000000001', 20.0, 20.0, 20.0, 10.0, 'Trujillo', 'Angasmarca',
+                    'Angasmarca', 45.0, 'EN AGENCIA', '20/05/26',
+                    '20/05/26', '21/05/26', NULL
+                )
+                """.trimIndent()
+            )
+            database.execSQL(
+                """
+                INSERT OR IGNORE INTO encomiendas (
+                    id, numeroGuia, largo, ancho, alto, peso, origen, destino,
+                    tarifaDestino, tarifaCosto, estado, fechaRegistro,
+                    fechaTransito, fechaAgencia, fechaEntrega
+                ) VALUES (
+                    2, 'C000000345', 35.0, 25.0, 18.0, 7.5, 'Lima', 'Trujillo',
+                    'Trujillo', 38.0, 'EN TRÁNSITO', '18/06/26',
+                    '19/06/26', NULL, NULL
+                )
+                """.trimIndent()
+            )
+            database.execSQL(
+                """
+                INSERT OR IGNORE INTO encomiendas (
+                    id, numeroGuia, largo, ancho, alto, peso, origen, destino,
+                    tarifaDestino, tarifaCosto, estado, fechaRegistro,
+                    fechaTransito, fechaAgencia, fechaEntrega
+                ) VALUES (
+                    3, 'C000000782', 15.0, 12.0, 10.0, 2.0, 'Chiclayo', 'Lima',
+                    'Lima', 24.0, 'REGISTRADO', '21/06/26',
+                    NULL, NULL, NULL
+                )
+                """.trimIndent()
+            )
         }
     }
 }

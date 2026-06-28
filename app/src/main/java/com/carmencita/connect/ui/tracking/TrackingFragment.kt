@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentTrackingBinding
+import com.carmencita.connect.databinding.ItemHistorialTrackingBinding
 import com.carmencita.connect.viewmodel.TrackingViewModel
 
 class TrackingFragment : Fragment() {
@@ -31,15 +33,17 @@ class TrackingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBuscar.setOnClickListener {
-            val imm = requireContext().getSystemService(
-                android.content.Context.INPUT_METHOD_SERVICE
-            ) as android.view.inputmethod.InputMethodManager
-            imm.hideSoftInputFromWindow(binding.etNumeroGuia.windowToken, 0)
-
+            ocultarTeclado()
             viewModel.buscarEncomienda(
                 binding.etNumeroGuia.text.toString().trim()
             )
         }
+
+        binding.tvLimpiarHistorial.setOnClickListener {
+            viewModel.limpiarHistorial()
+        }
+
+        viewModel.historial.observe(viewLifecycleOwner, ::mostrarHistorial)
 
         viewModel.estado.observe(viewLifecycleOwner) { estado ->
             when (estado) {
@@ -72,6 +76,37 @@ class TrackingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun mostrarHistorial(codigos: List<String>) {
+        val historialVacio = codigos.isEmpty()
+        binding.contenedorHistorial.removeAllViews()
+        binding.contenedorHistorial.visibility = if (historialVacio) View.GONE else View.VISIBLE
+        binding.estadoHistorialVacio.visibility = if (historialVacio) View.VISIBLE else View.GONE
+        binding.tvLimpiarHistorial.visibility = if (historialVacio) View.GONE else View.VISIBLE
+
+        codigos.forEach { codigo ->
+            val itemBinding = ItemHistorialTrackingBinding.inflate(
+                layoutInflater,
+                binding.contenedorHistorial,
+                false
+            )
+            itemBinding.tvCodigoHistorial.text = codigo
+            itemBinding.root.setOnClickListener {
+                binding.etNumeroGuia.setText(codigo)
+                binding.etNumeroGuia.setSelection(codigo.length)
+                ocultarTeclado()
+                viewModel.buscarEncomienda(codigo)
+            }
+            binding.contenedorHistorial.addView(itemBinding.root)
+        }
+    }
+
+    private fun ocultarTeclado() {
+        val inputMethodManager = requireContext().getSystemService(
+            android.content.Context.INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(binding.etNumeroGuia.windowToken, 0)
     }
 
     private fun mostrarDialog() {
