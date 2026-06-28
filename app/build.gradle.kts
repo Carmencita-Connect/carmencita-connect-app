@@ -1,7 +1,20 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
 }
+
+val localProperties = Properties().apply {
+    val propertiesFile = rootProject.file("local.properties")
+    if (propertiesFile.exists()) {
+        propertiesFile.inputStream().use(::load)
+    }
+}
+
+fun localProperty(name: String): String =
+    localProperties.getProperty(name, "").replace("\\", "\\\\").replace("\"", "\\\"")
 
 android {
     namespace = "com.carmencita.connect"
@@ -17,6 +30,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "EMAILJS_SERVICE_ID", "\"${localProperty("EMAILJS_SERVICE_ID")}\"")
+        buildConfigField("String", "EMAILJS_TEMPLATE_ID", "\"${localProperty("EMAILJS_TEMPLATE_ID")}\"")
+        buildConfigField("String", "EMAILJS_PUBLIC_KEY", "\"${localProperty("EMAILJS_PUBLIC_KEY")}\"")
     }
 
     buildTypes {
@@ -38,12 +54,15 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

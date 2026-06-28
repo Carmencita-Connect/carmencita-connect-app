@@ -12,7 +12,26 @@
         android:padding="20dp">
 
         <!-- Título -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/bg_boton_titulo"
+                android:contentDescription="Cerrar sesión"
+                android:padding="10dp"
+                android:src="@drawable/ic_logout"
+                android:visibility="gone" />
+        </FrameLayout>
+
         <TextView
+            android:id="@+id/tvTituloInicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -32,6 +51,35 @@
             android:src="@drawable/img_transporte_cc"
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:id="@+id/btnMiPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/avatar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mi Perfil"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
         <!-- Botón Ver agencias -->
         <LinearLayout
