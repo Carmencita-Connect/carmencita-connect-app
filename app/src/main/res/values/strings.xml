@@ -144,4 +144,12 @@
     <!-- Descripción carga -->
     <string name="label_descripcion_carga">Descripción de la carga</string>
     <string name="hint_descripcion_carga">Ej: ropa, electrodomésticos, documentos...</string>
+    <!-- HU-08 Historial de tracking -->
+    <string name="historial_tracking_titulo">Últimos códigos consultados</string>
+    <string name="historial_tracking_subtitulo">Selecciona uno para ver su estado</string>
+    <string name="historial_tracking_limpiar">Limpiar historial</string>
+    <string name="historial_tracking_vacio_titulo">No existen búsquedas recientes</string>
+    <string name="historial_tracking_vacio_mensaje">Los códigos de seguimiento que consultes aparecerán aquí</string>
+    <string name="historial_tracking_icono">Historial de consultas</string>
+    <string name="historial_tracking_consultar">Consultar código</string>
 </resources>
