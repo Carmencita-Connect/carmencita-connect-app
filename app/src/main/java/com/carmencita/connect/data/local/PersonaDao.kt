@@ -21,4 +21,7 @@ interface PersonaDao {
 
     @Query("UPDATE personas SET telefono = :telefono WHERE id = :id")
     fun actualizarTelefono(id: Long, telefono: String): Int
+
+    @Query("UPDATE personas SET nombre = :nombre, telefono = :telefono WHERE id = :id")
+    fun actualizarPerfil(id: Long, nombre: String, telefono: String): Int
 }

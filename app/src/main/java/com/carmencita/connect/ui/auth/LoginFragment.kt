@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentLoginBinding
 import com.carmencita.connect.ui.invitado.InvitadoFragment
+import com.carmencita.connect.ui.menu.MenuPrincipalFragment
 import com.carmencita.connect.viewmodel.LoginViewModel
 import com.carmencita.connect.viewmodel.PerfilViewModel
 import com.carmencita.connect.viewmodel.SesionViewModel
@@ -52,14 +53,14 @@ class LoginFragment : Fragment() {
         binding.btnInvitado.setOnClickListener {
             sesionViewModel.entrarComoInvitado()
             perfilViewModel.limpiarPerfil()
-            navegarInicio()
+            navegarInvitado()
         }
 
         loginViewModel.loginExitoso.observe(viewLifecycleOwner) { exitoso ->
             if (exitoso) {
                 sesionViewModel.cargarSesion()
                 loginViewModel.limpiarEstado()
-                navegarInicio()
+                navegarMenuPrincipal()
             }
         }
 
@@ -74,9 +75,15 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun navegarInicio() {
+    private fun navegarInvitado() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.contenedorFragment, InvitadoFragment())
+            .commit()
+    }
+
+    private fun navegarMenuPrincipal() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.contenedorFragment, MenuPrincipalFragment())
             .commit()
     }
 

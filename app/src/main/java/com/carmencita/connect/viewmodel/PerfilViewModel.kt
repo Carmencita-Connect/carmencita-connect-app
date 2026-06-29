@@ -48,15 +48,28 @@ class PerfilViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun actualizarTelefono(telefono: String) {
+        val nombreActual = _persona.value?.nombre.orEmpty()
+        actualizarPerfil(nombreActual, telefono)
+    }
+
+    fun actualizarPerfil(nombre: String, telefono: String) {
+        if (nombre.isBlank()) {
+            _error.value = "El nombre no puede estar vacio"
+            return
+        }
+        if (!nombre.trim().all { it.isLetter() || it.isWhitespace() }) {
+            _error.value = "El nombre solo debe contener letras"
+            return
+        }
         if (telefono.length != 9 || !telefono.all { it.isDigit() }) {
-            _error.value = "El teléfono debe tener 9 dígitos"
+            _error.value = "El telefono debe tener 9 digitos"
             return
         }
 
         _cargando.value = true
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
-                runCatching { repository.actualizarTelefono(telefono.trim()) }
+                runCatching { repository.actualizarPerfil(nombre.trim(), telefono.trim()) }
             }
             _cargando.value = false
             result.onSuccess { personaResult ->

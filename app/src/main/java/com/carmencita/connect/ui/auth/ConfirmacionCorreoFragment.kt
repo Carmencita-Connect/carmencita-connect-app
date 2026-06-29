@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentConfirmacionCorreoBinding
-import com.carmencita.connect.ui.invitado.InvitadoFragment
+import com.carmencita.connect.ui.menu.MenuPrincipalFragment
 import com.carmencita.connect.viewmodel.RegistroViewModel
 import com.carmencita.connect.viewmodel.SesionViewModel
 
@@ -84,7 +84,7 @@ class ConfirmacionCorreoFragment : Fragment() {
                 sesionViewModel.cargarSesion()
                 registroViewModel.limpiarEstado()
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.contenedorFragment, InvitadoFragment())
+                    .replace(R.id.contenedorFragment, MenuPrincipalFragment())
                     .commit()
             }
         }
