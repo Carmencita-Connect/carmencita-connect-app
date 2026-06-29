@@ -163,6 +163,40 @@
             android:textColor="@color/color_letra_2"
             android:textSize="13sp"
             android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/btnSeleccionarDesdeAgenda"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_contact_book" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hu12_seleccionar_desde_agenda"
+                android:textColor="@color/color_letra_1"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_chevron_right" />
+        </LinearLayout>
+
         <EditText
             android:id="@+id/etDestinatario"
             android:layout_width="match_parent"

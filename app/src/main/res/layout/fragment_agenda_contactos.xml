@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_boton_titulo"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="@string/hu12_titulo_agenda"
+            android:textColor="@color/color_letra_2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubtituloAgenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/hu12_subtitulo_agenda"
+            android:textColor="@color/color_letra_1"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etBuscarContacto"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_campo_texto"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:hint="@string/hu12_hint_buscar"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="@color/color_letra_2"
+            android:textColorHint="@color/color_hint" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAgregarContacto"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/hu12_agregar_contacto"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_letra_1"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:id="@+id/tvErrorAgenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:textColor="@color/color_error"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvMensajeAgenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:textColor="@color/color_letra_1"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/contenedorContactos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/tvAgendaVacia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/hu12_agenda_vacia"
+            android:textColor="@color/color_letra_2"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

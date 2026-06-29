@@ -11,6 +11,22 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/bg_boton_titulo"
+                android:contentDescription="Cerrar sesion"
+                android:padding="10dp"
+                android:src="@drawable/ic_logout" />
+        </FrameLayout>
+
         <TextView
             android:id="@+id/tvTituloInicio"
             android:layout_width="match_parent"
@@ -20,7 +36,7 @@
             android:background="@drawable/bg_boton_titulo"
             android:gravity="center"
             android:padding="14dp"
-            android:text="@string/titulo_invitado"
+            android:text="@string/titulo_menu_principal"
             android:textColor="@color/color_letra_2"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -31,6 +47,62 @@
             android:layout_marginBottom="16dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_transporte_cc" />
+
+        <LinearLayout
+            android:id="@+id/btnMiPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/avatar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mi Perfil"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnAgendaContactos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_contact_book" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hu12_menu_agenda"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btnVerAgencias"
@@ -53,6 +125,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_ver_agencias"
+                android:textColor="@color/color_letra_2"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton_blanco"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ico_tracking" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_tracking"
                 android:textColor="@color/color_letra_2"
                 android:textSize="16sp"
                 android:textStyle="bold" />

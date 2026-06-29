@@ -3,6 +3,7 @@
     <string name="version">versión 1</string>
 
     <string name="titulo_invitado">Ingresaste como invitado</string>
+    <string name="titulo_menu_principal">Menu principal</string>
     <string name="btn_ver_agencias">Ver agencias</string>
     <string name="btn_tracking">Tracking</string>
     <string name="btn_cotizar">Cotizar</string>
@@ -158,4 +159,31 @@
     <string name="historial_tracking_vacio_mensaje">Los códigos de seguimiento que consultes aparecerán aquí</string>
     <string name="historial_tracking_icono">Historial de consultas</string>
     <string name="historial_tracking_consultar">Consultar código</string>
+    <!-- HU-12 Agenda de contactos -->
+    <string name="hu12_titulo_agenda">Agenda de contactos</string>
+    <string name="hu12_subtitulo_agenda">Tus destinatarios frecuentes</string>
+    <string name="hu12_hint_buscar">Buscar contacto por nombre o DNI</string>
+    <string name="hu12_agregar_contacto">+ Agregar contacto</string>
+    <string name="hu12_agenda_vacia">No tienes contactos guardados</string>
+    <string name="hu12_titulo_nuevo">Nuevo contacto</string>
+    <string name="hu12_titulo_editar">Editar contacto</string>
+    <string name="hu12_contacto">Contacto</string>
+    <string name="hu12_nombre">Nombre completo</string>
+    <string name="hu12_dni">DNI</string>
+    <string name="hu12_telefono">Telefono</string>
+    <string name="hu12_direccion">Direccion</string>
+    <string name="hu12_hint_nombre">Ej: Maria del Carmen Lopez Perez</string>
+    <string name="hu12_hint_dni">Ej: 12345678</string>
+    <string name="hu12_hint_telefono">Ej: 999999999</string>
+    <string name="hu12_hint_direccion">Ej: Jr. Pizarro 123</string>
+    <string name="hu12_guardar_contacto">Guardar contacto</string>
+    <string name="hu12_guardar_cambios">Guardar cambios</string>
+    <string name="hu12_cancelar">Cancelar</string>
+    <string name="hu12_editar">Editar</string>
+    <string name="hu12_eliminar">Eliminar</string>
+    <string name="hu12_menu_agenda">Agenda de contactos</string>
+    <string name="hu12_seleccionar_desde_agenda">Seleccionar desde agenda</string>
+    <string name="hu12_confirmar_eliminar">Desea eliminar el contacto?</string>
+    <string name="hu12_si">Si</string>
+    <string name="hu12_no">No</string>
 </resources>

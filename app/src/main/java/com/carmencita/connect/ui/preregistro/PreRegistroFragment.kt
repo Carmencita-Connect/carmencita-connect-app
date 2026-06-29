@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentPreregistroBinding
+import com.carmencita.connect.ui.agenda.AgendaContactosFragment
+import com.carmencita.connect.viewmodel.AgendaContactosViewModel
 import com.carmencita.connect.viewmodel.CotizacionViewModel
 import com.carmencita.connect.viewmodel.PagoViewModel
 import com.carmencita.connect.viewmodel.PerfilViewModel
@@ -24,6 +26,7 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
     private val pagoViewModel: PagoViewModel by activityViewModels()
     private val perfilViewModel: PerfilViewModel by activityViewModels()
     private val sesionViewModel: SesionViewModel by activityViewModels()
+    private val agendaViewModel: AgendaContactosViewModel by activityViewModels()
     private var autocompletarSolicitado = false
 
     override fun onCreateView(
@@ -42,6 +45,13 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
         binding.btnUsarMisDatos.setOnClickListener {
             autocompletarSolicitado = true
             perfilViewModel.cargarPerfil()
+        }
+
+        binding.btnSeleccionarDesdeAgenda.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, AgendaContactosFragment.paraSeleccion())
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.btnPagoAgencia.setOnClickListener {
@@ -98,6 +108,16 @@ class PreRegistroFragment : Fragment(), ConfirmarCancelarDialog.Listener {
 
         sesionViewModel.sesionActiva.observe(viewLifecycleOwner) { activa ->
             binding.btnUsarMisDatos.visibility = if (activa) View.VISIBLE else View.GONE
+            binding.btnSeleccionarDesdeAgenda.visibility = if (activa) View.VISIBLE else View.GONE
+        }
+
+        agendaViewModel.contactoSeleccionado.observe(viewLifecycleOwner) { contacto ->
+            contacto ?: return@observe
+            binding.etDestinatario.setText(contacto.nombre)
+            binding.etDniDestinatario.setText(contacto.dni)
+            binding.etTelefonoDestinatario.setText(contacto.telefono)
+            binding.etDireccionDestinatario.setText(contacto.direccion)
+            agendaViewModel.limpiarSeleccion()
         }
 
         perfilViewModel.persona.observe(viewLifecycleOwner) { persona ->

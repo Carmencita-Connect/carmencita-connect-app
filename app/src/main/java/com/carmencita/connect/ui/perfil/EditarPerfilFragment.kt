@@ -29,11 +29,15 @@ class EditarPerfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         perfilViewModel.persona.value?.let { persona ->
+            binding.etNombre.setText(persona.nombre)
             binding.etTelefono.setText(persona.telefono)
         }
 
         binding.btnGuardarCambios.setOnClickListener {
-            perfilViewModel.actualizarTelefono(binding.etTelefono.text.toString())
+            perfilViewModel.actualizarPerfil(
+                nombre = binding.etNombre.text.toString(),
+                telefono = binding.etTelefono.text.toString()
+            )
         }
 
         binding.btnVolver.setOnClickListener {
@@ -41,6 +45,9 @@ class EditarPerfilFragment : Fragment() {
         }
 
         perfilViewModel.persona.observe(viewLifecycleOwner) { persona ->
+            if (binding.etNombre.text.isNullOrBlank()) {
+                binding.etNombre.setText(persona?.nombre.orEmpty())
+            }
             if (binding.etTelefono.text.isNullOrBlank()) {
                 binding.etTelefono.setText(persona?.telefono.orEmpty())
             }

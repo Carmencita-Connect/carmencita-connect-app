@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.carmencita.connect.data.local.ContactoFrecuenteDao
+import com.carmencita.connect.data.local.ContactoFrecuenteEntity
 import com.carmencita.connect.data.local.EncomiendaDao
 import com.carmencita.connect.data.local.EncomiendaEntity
 import com.carmencita.connect.data.local.PersonaDao
@@ -12,14 +14,15 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [PersonaEntity::class, EncomiendaEntity::class],
-    version = 3,
+    entities = [PersonaEntity::class, EncomiendaEntity::class, ContactoFrecuenteEntity::class],
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun personaDao(): PersonaDao
     abstract fun encomiendaDao(): EncomiendaDao
+    abstract fun contactoFrecuenteDao(): ContactoFrecuenteDao
 
     companion object {
         @Volatile
@@ -32,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "carmencita_local.db"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .addCallback(CREAR_DATOS_INICIALES)
                     .build()
                     .also { INSTANCE = it }
@@ -85,6 +88,12 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                crearTablaContactosFrecuentes(database)
+            }
+        }
+
         private val CREAR_DATOS_INICIALES = object : RoomDatabase.Callback() {
             override fun onCreate(database: SupportSQLiteDatabase) {
                 super.onCreate(database)
@@ -117,6 +126,25 @@ abstract class AppDatabase : RoomDatabase() {
             database.execSQL(
                 "CREATE UNIQUE INDEX IF NOT EXISTS index_encomiendas_numeroGuia " +
                     "ON encomiendas(numeroGuia)"
+            )
+        }
+
+        private fun crearTablaContactosFrecuentes(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS contactos_frecuentes (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    personaId INTEGER NOT NULL,
+                    nombre TEXT NOT NULL,
+                    dni TEXT NOT NULL,
+                    telefono TEXT NOT NULL,
+                    direccion TEXT NOT NULL
+                )
+                """.trimIndent()
+            )
+            database.execSQL(
+                "CREATE UNIQUE INDEX IF NOT EXISTS index_contactos_frecuentes_personaId_dni " +
+                    "ON contactos_frecuentes(personaId, dni)"
             )
         }
 
