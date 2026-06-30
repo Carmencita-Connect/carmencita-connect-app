@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentTrackingBinding
 import com.carmencita.connect.databinding.ItemHistorialTrackingBinding
+import com.carmencita.connect.viewmodel.SesionViewModel
 import com.carmencita.connect.viewmodel.TrackingViewModel
 
 class TrackingFragment : Fragment() {
@@ -18,6 +19,7 @@ class TrackingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: TrackingViewModel by activityViewModels()
+    private val sesionViewModel: SesionViewModel by activityViewModels()
     private var validandoDialog: TrackingValidandoDialog? = null
 
     override fun onCreateView(
@@ -31,6 +33,7 @@ class TrackingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sesionViewModel.cargarSesion()
 
         binding.btnBuscar.setOnClickListener {
             ocultarTeclado()
@@ -44,6 +47,10 @@ class TrackingFragment : Fragment() {
         }
 
         viewModel.historial.observe(viewLifecycleOwner, ::mostrarHistorial)
+        sesionViewModel.sesionActiva.observe(viewLifecycleOwner) { activa ->
+            binding.panelHistorial.visibility = if (activa) View.VISIBLE else View.GONE
+            viewModel.configurarHistorial(activa)
+        }
 
         viewModel.estado.observe(viewLifecycleOwner) { estado ->
             when (estado) {

@@ -78,6 +78,7 @@ class LoginFragment : Fragment() {
     private fun navegarInvitado() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.contenedorFragment, InvitadoFragment())
+            .addToBackStack(null)
             .commit()
     }
 

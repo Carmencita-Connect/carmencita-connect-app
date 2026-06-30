@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.carmencita.connect.data.EncomiendaRepository
 import com.carmencita.connect.data.HistorialTrackingRepository
+import com.carmencita.connect.data.SesionRepository
 import com.carmencita.connect.model.Encomienda
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,6 +18,7 @@ class TrackingViewModel(application: Application) : AndroidViewModel(application
 
     private val repository = EncomiendaRepository(application)
     private val historialRepository = HistorialTrackingRepository(application)
+    private val sesionRepository = SesionRepository(application)
 
     sealed class TrackingEstado {
         object Idle : TrackingEstado()
@@ -28,8 +30,16 @@ class TrackingViewModel(application: Application) : AndroidViewModel(application
     private val _estado = MutableLiveData<TrackingEstado>(TrackingEstado.Idle)
     val estado: LiveData<TrackingEstado> = _estado
 
-    private val _historial = MutableLiveData(historialRepository.obtenerCodigos())
+    private val _historial = MutableLiveData<List<String>>(emptyList())
     val historial: LiveData<List<String>> = _historial
+
+    fun configurarHistorial(habilitado: Boolean) {
+        _historial.value = if (habilitado) {
+            historialRepository.obtenerCodigos()
+        } else {
+            emptyList()
+        }
+    }
 
     fun buscarEncomienda(numeroGuia: String) {
         if (numeroGuia.isEmpty()) return
@@ -42,7 +52,14 @@ class TrackingViewModel(application: Application) : AndroidViewModel(application
                 repository.buscarPorGuia(numeroGuia)
             }
             _estado.value = if (encomienda != null) {
-                _historial.value = historialRepository.guardarCodigo(encomienda.numeroGuia)
+                val historialActualizado = withContext(Dispatchers.IO) {
+                    if (sesionRepository.haySesionActiva()) {
+                        historialRepository.guardarCodigo(encomienda.numeroGuia)
+                    } else {
+                        emptyList()
+                    }
+                }
+                _historial.value = historialActualizado
                 TrackingEstado.Resultado(encomienda)
             } else {
                 TrackingEstado.CodigoInvalido
@@ -51,6 +68,10 @@ class TrackingViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun limpiarHistorial() {
+        if (!sesionRepository.haySesionActiva()) {
+            _historial.value = emptyList()
+            return
+        }
         historialRepository.limpiar()
         _historial.value = emptyList()
     }

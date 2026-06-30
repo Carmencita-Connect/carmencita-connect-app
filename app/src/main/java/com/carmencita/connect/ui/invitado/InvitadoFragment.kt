@@ -11,6 +11,7 @@ import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentInvitadoBinding
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
 import com.carmencita.connect.ui.sedes.SedesFragment
+import com.carmencita.connect.ui.tracking.TrackingFragment
 
 class InvitadoFragment : Fragment() {
 
@@ -32,6 +33,13 @@ class InvitadoFragment : Fragment() {
         binding.btnVerAgencias.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, SedesFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnTracking.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, TrackingFragment())
                 .addToBackStack(null)
                 .commit()
         }
