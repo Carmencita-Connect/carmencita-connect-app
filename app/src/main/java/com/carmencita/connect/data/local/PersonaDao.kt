@@ -1,0 +1,27 @@
+package com.carmencita.connect.data.local
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+
+@Dao
+interface PersonaDao {
+
+    @Insert
+    fun insertar(persona: PersonaEntity): Long
+
+    @Query("SELECT * FROM personas WHERE id = :id LIMIT 1")
+    fun obtenerPorId(id: Long): PersonaEntity?
+
+    @Query("SELECT * FROM personas WHERE dni = :dni LIMIT 1")
+    fun obtenerPorDni(dni: String): PersonaEntity?
+
+    @Query("SELECT * FROM personas WHERE correo = :correo LIMIT 1")
+    fun obtenerPorCorreo(correo: String): PersonaEntity?
+
+    @Query("UPDATE personas SET telefono = :telefono WHERE id = :id")
+    fun actualizarTelefono(id: Long, telefono: String): Int
+
+    @Query("UPDATE personas SET nombre = :nombre, telefono = :telefono WHERE id = :id")
+    fun actualizarPerfil(id: Long, nombre: String, telefono: String): Int
+}

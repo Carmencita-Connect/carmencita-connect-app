@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_letra_1">#00B3A5</color>
+    <color name="color_letra_2">#235166</color>
+    <color name="color_fondo_titulo">#1A00B3A5</color>
+
+    <color name="color_borde">#00B3A5</color>
+    <color name="color_hint">#B1B2B5</color>
+    <color name="color_error">#E53935</color>
 </resources>
