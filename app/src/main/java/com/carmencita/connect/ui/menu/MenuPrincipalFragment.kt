@@ -13,6 +13,7 @@ import com.carmencita.connect.databinding.FragmentMenuPrincipalBinding
 import com.carmencita.connect.ui.agenda.AgendaContactosFragment
 import com.carmencita.connect.ui.auth.LoginFragment
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
+import com.carmencita.connect.ui.notificaciones.HistorialNotificacionesFragment
 import com.carmencita.connect.ui.perfil.MiPerfilFragment
 import com.carmencita.connect.ui.sedes.SedesFragment
 import com.carmencita.connect.ui.tracking.TrackingFragment
@@ -51,6 +52,13 @@ class MenuPrincipalFragment : Fragment() {
         binding.btnAgendaContactos.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, AgendaContactosFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnHistorialNotificaciones.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, HistorialNotificacionesFragment())
                 .addToBackStack(null)
                 .commit()
         }
