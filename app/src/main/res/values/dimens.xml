@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chatbot_bubble_margin">8dp</dimen>
+    <dimen name="chatbot_bubble_padding">12dp</dimen>
+    <dimen name="chatbot_bubble_max_offset">72dp</dimen>
+</resources>

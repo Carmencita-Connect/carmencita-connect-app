@@ -1,0 +1,69 @@
+package com.carmencita.connect.data
+
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ChatbotTarifasAssistantTest {
+
+    private val assistant = ChatbotTarifasAssistant()
+
+    @Test
+    fun responder_calculaTarifaCuandoRecibeDatosCompletos() {
+        val respuesta = assistant.responder(
+            "cotizar largo 30 ancho 20 alto 15 peso 5 origen Trujillo destino Angasmarca"
+        )
+
+        assertTrue(respuesta.contains("S/ 41.50"))
+    }
+
+    @Test
+    fun responder_solicitaFormatoCuandoFaltanDatosDeCotizacion() {
+        val respuesta = assistant.responder("Cuanto cuesta mi envio?")
+
+        assertTrue(respuesta.contains("Para calcular una tarifa"))
+    }
+
+    @Test
+    fun responder_contestaPreguntaFrecuenteDeHorarios() {
+        val respuesta = assistant.responder("Cual es el horario de atencion?")
+
+        assertTrue(respuesta.contains("8:00 am"))
+    }
+
+    @Test
+    fun responder_priorizaTrackingSobreConsultaGeneralDeEncomienda() {
+        val respuesta = assistant.responder("Como rastreo mi encomienda?")
+
+        assertTrue(respuesta.contains("Tracking"))
+    }
+
+    @Test
+    fun responder_priorizaLlamadaSobreConsultaGeneralDeSedes() {
+        val respuesta = assistant.responder("Como llamo a una sede?")
+
+        assertTrue(respuesta.contains("Llamar sede"))
+    }
+
+    @Test
+    fun responder_priorizaArticulosRestringidosSobreConsultaGeneralDeEnvio() {
+        val respuesta = assistant.responder("Que articulos no puedo enviar?")
+
+        assertTrue(respuesta.contains("No se deben enviar"))
+    }
+
+    @Test
+    fun responder_contestaPreguntaFrecuenteDePago() {
+        val respuesta = assistant.responder("Como puedo pagar?")
+
+        assertTrue(respuesta.contains("pago digital"))
+    }
+
+    @Test
+    fun responder_validaOrigenYDestinoDiferentes() {
+        val respuesta = assistant.responder(
+            "cotizar largo 30 ancho 20 alto 15 peso 5 origen Trujillo destino Trujillo"
+        )
+
+        assertTrue(respuesta.contains("origen y destino"))
+    }
+}
