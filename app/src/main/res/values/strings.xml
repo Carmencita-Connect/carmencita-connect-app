@@ -20,6 +20,18 @@
     <string name="hu14_telefono_no_disponible">La sede no tiene un telefono disponible</string>
     <string name="hu14_marcador_no_disponible">No se encontro una aplicacion para realizar llamadas</string>
 
+    <!-- HU-10 Historial de notificaciones -->
+    <string name="hu10_menu_notificaciones">Notificaciones</string>
+    <string name="hu10_titulo_historial">Historial de notificaciones</string>
+    <string name="hu10_subtitulo_historial">Revisa las notificaciones recibidas sobre tus envios</string>
+    <string name="hu10_limpiar_historial">Limpiar historial</string>
+    <string name="hu10_historial_vacio">No tienes notificaciones registradas</string>
+    <string name="hu10_icono_notificacion">Notificacion</string>
+    <string name="hu10_confirmar_limpiar_titulo">Limpiar historial</string>
+    <string name="hu10_confirmar_limpiar_mensaje">Deseas eliminar todas las notificaciones del historial?</string>
+    <string name="hu10_limpiar">Limpiar</string>
+    <string name="hu10_cancelar">Cancelar</string>
+
     <string name="titulo_cotizar">Cotiza tu envío</string>
     <string name="label_medidas">Ingresa las medidas de tu paquete</string>
     <string name="label_largo">Largo (cm)</string>

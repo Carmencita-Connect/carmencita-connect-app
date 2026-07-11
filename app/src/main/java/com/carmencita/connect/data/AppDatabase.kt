@@ -8,14 +8,21 @@ import com.carmencita.connect.data.local.ContactoFrecuenteDao
 import com.carmencita.connect.data.local.ContactoFrecuenteEntity
 import com.carmencita.connect.data.local.EncomiendaDao
 import com.carmencita.connect.data.local.EncomiendaEntity
+import com.carmencita.connect.data.local.NotificacionDao
+import com.carmencita.connect.data.local.NotificacionEntity
 import com.carmencita.connect.data.local.PersonaDao
 import com.carmencita.connect.data.local.PersonaEntity
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [PersonaEntity::class, EncomiendaEntity::class, ContactoFrecuenteEntity::class],
-    version = 4,
+    entities = [
+        PersonaEntity::class,
+        EncomiendaEntity::class,
+        ContactoFrecuenteEntity::class,
+        NotificacionEntity::class
+    ],
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -23,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun personaDao(): PersonaDao
     abstract fun encomiendaDao(): EncomiendaDao
     abstract fun contactoFrecuenteDao(): ContactoFrecuenteDao
+    abstract fun notificacionDao(): NotificacionDao
 
     companion object {
         @Volatile
@@ -35,7 +43,12 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "carmencita_local.db"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                    .addMigrations(
+                        MIGRATION_1_2,
+                        MIGRATION_2_3,
+                        MIGRATION_3_4,
+                        MIGRATION_4_5
+                    )
                     .addCallback(CREAR_DATOS_INICIALES)
                     .build()
                     .also { INSTANCE = it }
@@ -94,6 +107,12 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                crearTablaNotificaciones(database)
+            }
+        }
+
         private val CREAR_DATOS_INICIALES = object : RoomDatabase.Callback() {
             override fun onCreate(database: SupportSQLiteDatabase) {
                 super.onCreate(database)
@@ -144,7 +163,27 @@ abstract class AppDatabase : RoomDatabase() {
             )
             database.execSQL(
                 "CREATE UNIQUE INDEX IF NOT EXISTS index_contactos_frecuentes_personaId_dni " +
-                    "ON contactos_frecuentes(personaId, dni)"
+                "ON contactos_frecuentes(personaId, dni)"
+            )
+        }
+
+        private fun crearTablaNotificaciones(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS notificaciones (
+                    id TEXT PRIMARY KEY NOT NULL,
+                    personaId INTEGER NOT NULL,
+                    titulo TEXT NOT NULL,
+                    mensaje TEXT NOT NULL,
+                    fecha TEXT NOT NULL,
+                    estado TEXT NOT NULL,
+                    creadoEn INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS index_notificaciones_personaId_creadoEn " +
+                    "ON notificaciones(personaId, creadoEn)"
             )
         }
 
