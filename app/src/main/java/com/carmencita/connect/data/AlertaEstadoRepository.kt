@@ -1,7 +1,7 @@
 package com.carmencita.connect.data
 
 import android.content.Context
-import com.carmencita.connect.model.AlertaCambioEstado
+import com.carmencita.connect.model.Alerta
 
 class AlertaEstadoRepository(context: Context) {
 
@@ -29,13 +29,13 @@ class AlertaEstadoRepository(context: Context) {
         ).orEmpty().ifBlank { AlertaEstadoPolicy.ESTADO_REGISTRADO }
     }
 
-    fun simularCambioEstado(): AlertaCambioEstado? {
+    fun simularCambioEstado(): Alerta? {
         val personaId = sesionRepository.obtenerPersonaId() ?: return null
         val anterior = estadoActual()
         val nuevo = AlertaEstadoPolicy.siguienteEstado(anterior)
         preferences.edit().putString(keyEstadoActual(personaId), nuevo).apply()
 
-        return AlertaCambioEstado(
+        return Alerta(
             numeroGuia = NUMERO_GUIA_DEMO,
             estadoAnterior = anterior,
             estadoNuevo = nuevo,

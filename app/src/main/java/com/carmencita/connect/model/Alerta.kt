@@ -1,6 +1,6 @@
 package com.carmencita.connect.model
 
-data class AlertaCambioEstado(
+data class Alerta(
     val numeroGuia: String,
     val estadoAnterior: String,
     val estadoNuevo: String,

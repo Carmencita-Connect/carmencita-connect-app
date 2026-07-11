@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.carmencita.connect.data.AlertaEstadoRepository
 import com.carmencita.connect.data.NotificacionRepository
-import com.carmencita.connect.model.AlertaCambioEstado
+import com.carmencita.connect.model.Alerta
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,8 +23,8 @@ class AlertasEstadoViewModel(application: Application) : AndroidViewModel(applic
     private val _estadoActual = MutableLiveData("")
     val estadoActual: LiveData<String> = _estadoActual
 
-    private val _ultimoCambio = MutableLiveData<AlertaCambioEstado?>()
-    val ultimoCambio: LiveData<AlertaCambioEstado?> = _ultimoCambio
+    private val _ultimoCambio = MutableLiveData<Alerta?>()
+    val ultimoCambio: LiveData<Alerta?> = _ultimoCambio
 
     private val _mensaje = MutableLiveData("")
     val mensaje: LiveData<String> = _mensaje

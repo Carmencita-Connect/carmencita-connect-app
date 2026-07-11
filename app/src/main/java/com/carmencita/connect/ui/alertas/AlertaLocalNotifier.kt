@@ -10,11 +10,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.carmencita.connect.R
-import com.carmencita.connect.model.AlertaCambioEstado
+import com.carmencita.connect.model.Alerta
 
 class AlertaLocalNotifier(private val context: Context) {
 
-    fun mostrar(cambio: AlertaCambioEstado) {
+    fun mostrar(cambio: Alerta) {
         if (!puedeNotificar()) return
 
         crearCanalSiCorresponde()

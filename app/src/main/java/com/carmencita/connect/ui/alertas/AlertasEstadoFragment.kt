@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.carmencita.connect.databinding.FragmentAlertasEstadoBinding
-import com.carmencita.connect.model.AlertaCambioEstado
+import com.carmencita.connect.model.Alerta
 import com.carmencita.connect.viewmodel.AlertasEstadoViewModel
 
 class AlertasEstadoFragment : Fragment() {
@@ -92,7 +92,7 @@ class AlertasEstadoFragment : Fragment() {
         viewModel.cargarConfiguracion()
     }
 
-    private fun mostrarUltimoCambio(cambio: AlertaCambioEstado) {
+    private fun mostrarUltimoCambio(cambio: Alerta) {
         binding.tvUltimaAlerta.visibility = View.VISIBLE
         binding.tvUltimaAlerta.text = cambio.mensaje
         binding.tvIndicacionRecojo.visibility =
