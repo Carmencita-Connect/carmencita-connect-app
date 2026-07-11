@@ -15,6 +15,10 @@
     <string name="subtitulo_sedes">Conoce nuestras agencias</string>
     <string name="descripcion_icono_agencia">Agencia</string>
     <string name="descripcion_abrir_ubicacion">Abrir ubicacion de la agencia</string>
+    <string name="hu14_btn_llamar_sede">Llamar sede</string>
+    <string name="hu14_descripcion_llamar_sede">Llamar a la sede seleccionada</string>
+    <string name="hu14_telefono_no_disponible">La sede no tiene un telefono disponible</string>
+    <string name="hu14_marcador_no_disponible">No se encontro una aplicacion para realizar llamadas</string>
 
     <string name="titulo_cotizar">Cotiza tu envío</string>
     <string name="label_medidas">Ingresa las medidas de tu paquete</string>
