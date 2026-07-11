@@ -39,7 +39,7 @@ class NotificacionRepository(context: Context) {
         )
         notificacionDao.eliminarExcedentes(
             personaId,
-            NotificacionHistoryPolicy.LIMITE_NOTIFICACIONES
+            HistorialNotificacionPolicy.LIMITE_NOTIFICACIONES
         )
         return notificacionDao.listarPorPersona(personaId).map { it.toModel() }
     }

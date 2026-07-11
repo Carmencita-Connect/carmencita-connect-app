@@ -2,7 +2,7 @@ package com.carmencita.connect.data
 
 import com.carmencita.connect.model.Notificacion
 
-object NotificacionHistoryPolicy {
+object HistorialNotificacionPolicy {
 
     const val LIMITE_NOTIFICACIONES = 20
 

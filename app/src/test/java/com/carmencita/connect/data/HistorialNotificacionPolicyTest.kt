@@ -4,14 +4,14 @@ import com.carmencita.connect.model.Notificacion
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class NotificacionHistoryPolicyTest {
+class HistorialNotificacionPolicyTest {
 
     @Test
     fun agregar_colocaLaNuevaNotificacionAlInicio() {
         val actual = notificacion("1")
         val nueva = notificacion("2")
 
-        val resultado = NotificacionHistoryPolicy.agregar(listOf(actual), nueva)
+        val resultado = HistorialNotificacionPolicy.agregar(listOf(actual), nueva)
 
         assertEquals(listOf(nueva, actual), resultado)
     }
@@ -21,7 +21,7 @@ class NotificacionHistoryPolicyTest {
         val anterior = notificacion("1", titulo = "Anterior")
         val actualizada = notificacion("1", titulo = "Actualizada")
 
-        val resultado = NotificacionHistoryPolicy.agregar(listOf(anterior), actualizada)
+        val resultado = HistorialNotificacionPolicy.agregar(listOf(anterior), actualizada)
 
         assertEquals(listOf(actualizada), resultado)
     }
@@ -31,7 +31,7 @@ class NotificacionHistoryPolicyTest {
         val historial = (1..20).map { notificacion("$it") }
         val nueva = notificacion("21")
 
-        val resultado = NotificacionHistoryPolicy.agregar(historial, nueva)
+        val resultado = HistorialNotificacionPolicy.agregar(historial, nueva)
 
         assertEquals(20, resultado.size)
         assertEquals("21", resultado.first().id)
@@ -42,7 +42,7 @@ class NotificacionHistoryPolicyTest {
         val historial = listOf(notificacion("1"))
         val invalida = notificacion("2", titulo = "")
 
-        val resultado = NotificacionHistoryPolicy.agregar(historial, invalida)
+        val resultado = HistorialNotificacionPolicy.agregar(historial, invalida)
 
         assertEquals(historial, resultado)
     }
