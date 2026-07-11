@@ -104,6 +104,71 @@ Responsabilidad:
 
 Permite buscar una encomienda por número de guía. Si la guía existe, se muestra el estado y la ruta logística. Si no existe, se muestra una pantalla de error.
 
+## Chatbot de tarifas
+
+Componentes:
+
+- `fragment_chatbot_tarifas.xml`
+- `ChatbotTarifasFragment`
+- `ChatbotTarifasViewModel`
+- `ChatbotTarifasAssistant`
+- `ChatbotMessage`
+- `TarifaRepository`
+
+Responsabilidad:
+
+Permite consultar tarifas aproximadas y preguntas frecuentes desde modo invitado o usuario registrado. El asistente interpreta consultas por palabras clave y reutiliza `TarifaRepository` cuando recibe largo, ancho, alto, peso, origen y destino.
+
+## Historial de notificaciones
+
+Componentes:
+
+- `fragment_historial_notificaciones.xml`
+- `item_notificacion.xml`
+- `HistorialNotificacionesFragment`
+- `HistorialNotificacionesViewModel`
+- `NotificacionRepository`
+- `NotificacionDao`
+- `NotificacionEntity`
+- `Notificacion`
+
+Responsabilidad:
+
+Permite al usuario registrado revisar las notificaciones recibidas. La informacion se almacena en Room en la tabla `notificaciones`, asociada al `personaId` del usuario.
+
+## Alertas de estado
+
+Componentes:
+
+- `fragment_alertas_estado.xml`
+- `AlertasEstadoFragment`
+- `AlertasEstadoViewModel`
+- `AlertaEstadoRepository`
+- `AlertaEstadoPolicy`
+- `AlertaLocalNotifier`
+- `AlertaCambioEstado`
+- `NotificacionRepository`
+
+Responsabilidad:
+
+Permite activar o desactivar alertas, simular cambios de estado de una encomienda de prueba y registrar una notificacion en el historial cuando las alertas estan activas.
+
+## Directorio de sedes y llamada rapida
+
+Componentes:
+
+- `fragment_sedes.xml`
+- `item_sede.xml`
+- `SedesFragment`
+- `SedesViewModel`
+- `SedeRepository`
+- `TelefonoSedeFormatter`
+- `Sede`
+
+Responsabilidad:
+
+Muestra las sedes disponibles con direccion, horario y telefono. Cada sede permite abrir su ubicacion y usar el boton `Llamar sede`, que abre el marcador telefonico con el numero fijo correspondiente.
+
 ## Pantalla de invitado
 
 Componentes:
@@ -112,6 +177,7 @@ Componentes:
 - `MainActivity`
 - `fragment_invitado.xml`
 - `InvitadoFragment`
+- `ChatbotTarifasFragment`
 
 Responsabilidad:
 

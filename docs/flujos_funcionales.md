@@ -25,3 +25,19 @@ Después de un pago digital confirmado, `PagoConfirmadoFragment` solicita a `Com
 ## HU07 - Tracking visual en tiempo real
 
 El usuario ingresa un número de guía. `TrackingFragment` envía el código a `TrackingViewModel`, que consulta `EncomiendaRepository`. Si la guía existe, se muestra `TrackingResultadoFragment`; si no existe, se muestra `TrackingInvalidoFragment`. La información actual proviene de datos locales de prueba.
+
+## HU06 - Consulta de tarifas mediante Chatbot
+
+El usuario registrado o invitado ingresa a `ChatbotTarifasFragment` desde su menu correspondiente. La pantalla muestra una conversacion entre el usuario y el asistente virtual. `ChatbotTarifasViewModel` administra los mensajes y usa `ChatbotTarifasAssistant` para interpretar consultas por palabras clave. Cuando el usuario ingresa largo, ancho, alto, peso, origen y destino, el asistente reutiliza `TarifaRepository` para calcular la tarifa estimada y mostrarla dentro del chat.
+
+## HU09 - Alertas de cambio de estado
+
+El usuario registrado ingresa a `AlertasEstadoFragment` desde el menu principal. Puede activar o desactivar alertas y simular el cambio de estado de una encomienda de prueba. `AlertasEstadoViewModel` usa `AlertaEstadoRepository` para avanzar el estado y, cuando las alertas estan activas, registra una notificacion mediante `NotificacionRepository`. La alerta tambien se muestra en pantalla y puede mostrarse como notificacion local si el permiso esta concedido.
+
+## HU10 - Registro de historial de notificaciones
+
+El usuario registrado ingresa a `HistorialNotificacionesFragment` desde el menu principal. `HistorialNotificacionesViewModel` consulta `NotificacionRepository`, que almacena las notificaciones en Room mediante la tabla `notificaciones`. La pantalla muestra titulo, mensaje, fecha y estado de cada notificacion. El usuario puede limpiar el historial, previa confirmacion.
+
+## HU14 - Comunicacion rapida via llamada
+
+El usuario ingresa al directorio de agencias desde el menu principal o modo invitado. `SedesFragment` muestra las sedes disponibles y cada tarjeta incluye el boton `Llamar sede`. Al presionarlo, se normaliza el numero mediante `TelefonoSedeFormatter` y se abre el marcador telefonico con `Intent.ACTION_DIAL`, sin realizar la llamada automaticamente.

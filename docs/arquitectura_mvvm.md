@@ -20,11 +20,19 @@ Clases principales:
 - `Pago`
 - `Comprobante`
 - `Tarifa`
+- `Sede`
+- `Notificacion`
+- `AlertaCambioEstado`
+- `ChatbotMessage`
 - `EncomiendaRepository`
 - `PreRegistroRepository`
 - `PagoRepository`
 - `ComprobanteRepository`
 - `TarifaRepository`
+- `SedeRepository`
+- `NotificacionRepository`
+- `AlertaEstadoRepository`
+- `ChatbotTarifasAssistant`
 
 ## ViewModel
 
@@ -45,6 +53,10 @@ Clases principales:
 - `PagoPresencialViewModel`
 - `ComprobanteViewModel`
 - `TrackingViewModel`
+- `SedesViewModel`
+- `HistorialNotificacionesViewModel`
+- `AlertasEstadoViewModel`
+- `ChatbotTarifasViewModel`
 
 ## Controller
 
@@ -68,6 +80,10 @@ Clases principales:
 - `TrackingFragment`
 - `TrackingResultadoFragment`
 - `TrackingInvalidoFragment`
+- `SedesFragment`
+- `HistorialNotificacionesFragment`
+- `AlertasEstadoFragment`
+- `ChatbotTarifasFragment`
 - `ConfirmarCancelarDialog`
 - `PagoValidandoDialog`
 - `ComprobanteGenerandoDialog`
@@ -94,6 +110,12 @@ Archivos principales:
 - `fragment_tracking.xml`
 - `fragment_tracking_resultado.xml`
 - `fragment_tracking_invalido.xml`
+- `fragment_sedes.xml`
+- `item_sede.xml`
+- `fragment_historial_notificaciones.xml`
+- `item_notificacion.xml`
+- `fragment_alertas_estado.xml`
+- `fragment_chatbot_tarifas.xml`
 - `dialog_confirmar_cancelar.xml`
 - `dialog_pago_validando.xml`
 - `dialog_comprobante_generando.xml`
