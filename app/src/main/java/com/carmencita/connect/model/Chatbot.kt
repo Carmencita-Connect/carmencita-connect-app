@@ -1,6 +1,6 @@
 package com.carmencita.connect.model
 
-data class ChatbotMessage(
+data class Chatbot(
     val texto: String,
     val enviadoPorUsuario: Boolean
 )

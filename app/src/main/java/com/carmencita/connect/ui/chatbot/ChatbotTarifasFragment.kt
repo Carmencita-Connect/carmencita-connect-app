@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentChatbotTarifasBinding
-import com.carmencita.connect.model.ChatbotMessage
+import com.carmencita.connect.model.Chatbot
 import com.carmencita.connect.viewmodel.ChatbotTarifasViewModel
 
 class ChatbotTarifasFragment : Fragment() {
@@ -55,7 +55,7 @@ class ChatbotTarifasFragment : Fragment() {
         ocultarTeclado()
     }
 
-    private fun mostrarMensajes(mensajes: List<ChatbotMessage>) {
+    private fun mostrarMensajes(mensajes: List<Chatbot>) {
         binding.contenedorMensajesChatbot.removeAllViews()
         mensajes.forEach { mensaje ->
             binding.contenedorMensajesChatbot.addView(crearBurbuja(mensaje))
@@ -65,7 +65,7 @@ class ChatbotTarifasFragment : Fragment() {
         }
     }
 
-    private fun crearBurbuja(mensaje: ChatbotMessage): TextView {
+    private fun crearBurbuja(mensaje: Chatbot): TextView {
         val margenHorizontal = resources.getDimensionPixelSize(R.dimen.chatbot_bubble_margin)
         val padding = resources.getDimensionPixelSize(R.dimen.chatbot_bubble_padding)
 
