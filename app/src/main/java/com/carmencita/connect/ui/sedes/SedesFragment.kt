@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.carmencita.connect.R
+import com.carmencita.connect.data.TelefonoSedeFormatter
 import com.carmencita.connect.databinding.FragmentSedesBinding
 import com.carmencita.connect.databinding.ItemSedeBinding
 import com.carmencita.connect.model.Sede
@@ -53,7 +56,7 @@ class SedesFragment : Fragment() {
             item.tvHorarioSede.text = sede.horario
 
             item.root.setOnClickListener { abrirUbicacion(sede) }
-            item.tvTelefonoSede.setOnClickListener { llamarSede(sede.telefono) }
+            item.btnLlamarSede.setOnClickListener { llamarSede(sede.telefono) }
 
             binding.contenedorSedes.addView(item.root)
         }
@@ -77,8 +80,26 @@ class SedesFragment : Fragment() {
     }
 
     private fun llamarSede(telefono: String) {
-        val numero = telefono.filter(Char::isDigit)
-        startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$numero")))
+        val numero = TelefonoSedeFormatter.normalizarParaMarcador(telefono)
+        if (numero == null) {
+            Toast.makeText(
+                requireContext(),
+                R.string.hu14_telefono_no_disponible,
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val intentLlamada = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$numero"))
+        if (intentLlamada.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intentLlamada)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                R.string.hu14_marcador_no_disponible,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onDestroyView() {

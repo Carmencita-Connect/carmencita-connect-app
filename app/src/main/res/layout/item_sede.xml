@@ -71,6 +71,27 @@
                 android:textColor="@color/color_letra_2"
                 android:textSize="12sp" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLlamarSede"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/hu14_descripcion_llamar_sede"
+                android:minWidth="120dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="@string/hu14_btn_llamar_sede"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_letra_1"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_telefono_sede"
+                app:iconGravity="textStart"
+                app:iconPadding="6dp"
+                app:iconTint="@color/white" />
+
         </LinearLayout>
 
         <ImageView

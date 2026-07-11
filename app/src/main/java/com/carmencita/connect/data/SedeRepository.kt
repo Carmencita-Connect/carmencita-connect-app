@@ -9,7 +9,7 @@ class SedeRepository {
             id = 1,
             nombre = "Agencia Trujillo",
             direccion = "Av. America Sur 222",
-            telefono = "999 999 999",
+            telefono = "(044) 123456",
             horario = "Lun - Dom: 8:00 am - 6:00 pm",
             latitud = -8.1116,
             longitud = -79.0287
@@ -18,7 +18,7 @@ class SedeRepository {
             id = 2,
             nombre = "Agencia Angasmarca",
             direccion = "Jr. Comercio 120",
-            telefono = "999 999 998",
+            telefono = "(044) 654321",
             horario = "Lun - Dom: 8:00 am - 6:00 pm",
             latitud = -8.1322,
             longitud = -78.0556
@@ -27,7 +27,7 @@ class SedeRepository {
             id = 3,
             nombre = "Agencia Santiago de Surco",
             direccion = "Av. Caminos del Inca 450",
-            telefono = "999 999 997",
+            telefono = "(01) 4567890",
             horario = "Lun - Dom: 8:00 am - 6:00 pm",
             latitud = -12.1450,
             longitud = -76.9916
