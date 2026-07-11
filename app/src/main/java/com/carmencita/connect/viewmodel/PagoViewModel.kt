@@ -62,6 +62,11 @@ class PagoViewModel : ViewModel() {
         _pagoGenerado.value = null
     }
 
+    fun limpiarEstado() {
+        _estado.value = PagoEstado.Idle
+        _error.value = ""
+    }
+
     fun resetear() {
         _estado.value = PagoEstado.Idle
         _metodoPago.value = ""

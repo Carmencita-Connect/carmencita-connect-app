@@ -50,6 +50,7 @@ class PagoPresencialFragment : Fragment() {
                 )
                 .addToBackStack(null)
                 .commit()
+            viewModel.resetear()
         }
 
         binding.btnEliminarPago.setOnClickListener {

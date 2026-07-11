@@ -119,6 +119,7 @@ class PagoDigitalFragment : Fragment() {
                             )
                             .addToBackStack(null)
                             .commit()
+                        viewModel.limpiarEstado()
                     }
                 }
                 is PagoViewModel.PagoEstado.Rechazado -> {

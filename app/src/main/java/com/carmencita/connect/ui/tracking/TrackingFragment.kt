@@ -68,6 +68,7 @@ class TrackingFragment : Fragment() {
                                 TrackingInvalidoFragment.newInstance(), "invalido")
                             .addToBackStack(null)
                             .commit()
+                        viewModel.resetear()
                     }
                 }
                 is TrackingViewModel.TrackingEstado.Resultado -> {
@@ -79,6 +80,7 @@ class TrackingFragment : Fragment() {
                                 "resultado")
                             .addToBackStack(null)
                             .commit()
+                        viewModel.resetear()
                     }
                 }
             }
