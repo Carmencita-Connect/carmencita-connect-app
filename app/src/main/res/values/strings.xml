@@ -32,6 +32,16 @@
     <string name="hu10_limpiar">Limpiar</string>
     <string name="hu10_cancelar">Cancelar</string>
 
+    <!-- HU-09 Alertas de cambio de estado -->
+    <string name="hu09_menu_alertas">Alertas de estado</string>
+    <string name="hu09_titulo_alertas">Alertas de cambio de estado</string>
+    <string name="hu09_subtitulo_alertas">Configura avisos para conocer el avance de tus envios</string>
+    <string name="hu09_configurar_alertas">Recibir alertas de estado</string>
+    <string name="hu09_encomienda_prueba">Encomienda de prueba</string>
+    <string name="hu09_guia_demo">Guia: C000000001</string>
+    <string name="hu09_simular_cambio">Simular cambio de estado</string>
+    <string name="hu09_recojo_agencia">Tu paquete esta listo para recojo en agencia</string>
+
     <string name="titulo_cotizar">Cotiza tu envío</string>
     <string name="label_medidas">Ingresa las medidas de tu paquete</string>
     <string name="label_largo">Largo (cm)</string>

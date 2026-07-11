@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentMenuPrincipalBinding
 import com.carmencita.connect.ui.agenda.AgendaContactosFragment
+import com.carmencita.connect.ui.alertas.AlertasEstadoFragment
 import com.carmencita.connect.ui.auth.LoginFragment
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
 import com.carmencita.connect.ui.notificaciones.HistorialNotificacionesFragment
@@ -59,6 +60,13 @@ class MenuPrincipalFragment : Fragment() {
         binding.btnHistorialNotificaciones.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, HistorialNotificacionesFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnAlertasEstado.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, AlertasEstadoFragment())
                 .addToBackStack(null)
                 .commit()
         }
