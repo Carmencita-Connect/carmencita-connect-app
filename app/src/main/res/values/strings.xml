@@ -43,7 +43,9 @@
     <string name="hu09_recojo_agencia">Tu paquete esta listo para recojo en agencia</string>
 
     <!-- HU-06 Chatbot de tarifas -->
-    <string name="hu06_menu_chatbot">Chatbot tarifas</string>
+    <string name="hu06_menu_chatbot">Cotizar con chat</string>
+    <string name="hu06_subtitulo_menu_chatbot">Asistente virtual</string>
+    <string name="hu06_icono_chatbot">Icono de chatbot</string>
     <string name="hu06_titulo_chatbot">Asistente de tarifas</string>
     <string name="hu06_subtitulo_chatbot">Consulta costos aproximados y preguntas frecuentes</string>
     <string name="hu06_hint_mensaje">Escribe tu consulta</string>
