@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.carmencita.connect.R
 import com.carmencita.connect.databinding.FragmentInvitadoBinding
+import com.carmencita.connect.ui.chatbot.ChatbotTarifasFragment
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
 import com.carmencita.connect.ui.sedes.SedesFragment
 import com.carmencita.connect.ui.tracking.TrackingFragment
@@ -47,6 +48,13 @@ class InvitadoFragment : Fragment() {
         binding.btnCotizar.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, CotizacionFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnChatbotTarifas.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, ChatbotTarifasFragment())
                 .addToBackStack(null)
                 .commit()
         }

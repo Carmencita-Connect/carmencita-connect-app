@@ -13,6 +13,7 @@ import com.carmencita.connect.databinding.FragmentMenuPrincipalBinding
 import com.carmencita.connect.ui.agenda.AgendaContactosFragment
 import com.carmencita.connect.ui.alertas.AlertasEstadoFragment
 import com.carmencita.connect.ui.auth.LoginFragment
+import com.carmencita.connect.ui.chatbot.ChatbotTarifasFragment
 import com.carmencita.connect.ui.cotizacion.CotizacionFragment
 import com.carmencita.connect.ui.notificaciones.HistorialNotificacionesFragment
 import com.carmencita.connect.ui.perfil.MiPerfilFragment
@@ -88,6 +89,13 @@ class MenuPrincipalFragment : Fragment() {
         binding.btnCotizar.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.contenedorFragment, CotizacionFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.btnChatbotTarifas.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.contenedorFragment, ChatbotTarifasFragment())
                 .addToBackStack(null)
                 .commit()
         }

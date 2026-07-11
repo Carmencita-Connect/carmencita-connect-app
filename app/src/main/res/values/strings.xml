@@ -42,6 +42,13 @@
     <string name="hu09_simular_cambio">Simular cambio de estado</string>
     <string name="hu09_recojo_agencia">Tu paquete esta listo para recojo en agencia</string>
 
+    <!-- HU-06 Chatbot de tarifas -->
+    <string name="hu06_menu_chatbot">Chatbot tarifas</string>
+    <string name="hu06_titulo_chatbot">Asistente de tarifas</string>
+    <string name="hu06_subtitulo_chatbot">Consulta costos aproximados y preguntas frecuentes</string>
+    <string name="hu06_hint_mensaje">Escribe tu consulta</string>
+    <string name="hu06_enviar">Enviar</string>
+
     <string name="titulo_cotizar">Cotiza tu envío</string>
     <string name="label_medidas">Ingresa las medidas de tu paquete</string>
     <string name="label_largo">Largo (cm)</string>
