@@ -34,7 +34,6 @@ documentacion/
 ### Manuales
 
 - [Manual de usuario de aplicacion](manuales/manual_usuario_aplicacion.md): explica el uso del producto y la guia de puesta en disponibilidad para el cliente.
-- [Manual de usuario en Word](manuales/Manual_de_usuario_de_aplicacion_Carmencita_Connect.docx): version entregable del manual en formato Word.
 
 ### Pruebas
 
