@@ -111,7 +111,7 @@ Componentes:
 - `fragment_chatbot_tarifas.xml`
 - `ChatbotTarifasFragment`
 - `ChatbotTarifasViewModel`
-- `ChatbotTarifasAssistant`
+- `ChatbotTarifasService`
 - `ChatbotMessage`
 - `TarifaRepository`
 
@@ -144,7 +144,7 @@ Componentes:
 - `AlertasEstadoFragment`
 - `AlertasEstadoViewModel`
 - `AlertaEstadoRepository`
-- `AlertaEstadoPolicy`
+- `ReglasEstadoEnvio`
 - `AlertaLocalNotifier`
 - `AlertaCambioEstado`
 - `NotificacionRepository`
@@ -162,7 +162,7 @@ Componentes:
 - `SedesFragment`
 - `SedesViewModel`
 - `SedeRepository`
-- `TelefonoSedeFormatter`
+- `FormateadorTelefonoSede`
 - `Sede`
 
 Responsabilidad:

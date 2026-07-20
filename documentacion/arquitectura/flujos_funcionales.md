@@ -28,7 +28,7 @@ El usuario ingresa un número de guía. `TrackingFragment` envía el código a `
 
 ## HU06 - Consulta de tarifas mediante Chatbot
 
-El usuario registrado o invitado ingresa a `ChatbotTarifasFragment` desde su menu correspondiente. La pantalla muestra una conversacion entre el usuario y el asistente virtual. `ChatbotTarifasViewModel` administra los mensajes y usa `ChatbotTarifasAssistant` para interpretar consultas por palabras clave. Cuando el usuario ingresa largo, ancho, alto, peso, origen y destino, el asistente reutiliza `TarifaRepository` para calcular la tarifa estimada y mostrarla dentro del chat.
+El usuario registrado o invitado ingresa a `ChatbotTarifasFragment` desde su menu correspondiente. La pantalla muestra una conversacion entre el usuario y el asistente virtual. `ChatbotTarifasViewModel` administra los mensajes y usa `ChatbotTarifasService` para interpretar consultas por palabras clave. Cuando el usuario ingresa largo, ancho, alto, peso, origen y destino, el servicio reutiliza `TarifaRepository` para calcular la tarifa estimada y mostrarla dentro del chat.
 
 ## HU09 - Alertas de cambio de estado
 
@@ -40,4 +40,4 @@ El usuario registrado ingresa a `HistorialNotificacionesFragment` desde el menu 
 
 ## HU14 - Comunicacion rapida via llamada
 
-El usuario ingresa al directorio de agencias desde el menu principal o modo invitado. `SedesFragment` muestra las sedes disponibles y cada tarjeta incluye el boton `Llamar sede`. Al presionarlo, se normaliza el numero mediante `TelefonoSedeFormatter` y se abre el marcador telefonico con `Intent.ACTION_DIAL`, sin realizar la llamada automaticamente.
+El usuario ingresa al directorio de agencias desde el menu principal o modo invitado. `SedesFragment` muestra las sedes disponibles y cada tarjeta incluye el boton `Llamar sede`. Al presionarlo, se normaliza el numero mediante `FormateadorTelefonoSede` y se abre el marcador telefonico con `Intent.ACTION_DIAL`, sin realizar la llamada automaticamente.

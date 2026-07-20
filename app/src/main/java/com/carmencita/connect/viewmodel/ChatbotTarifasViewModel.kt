@@ -3,12 +3,12 @@ package com.carmencita.connect.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.carmencita.connect.data.ChatbotTarifasAssistant
+import com.carmencita.connect.data.ChatbotTarifasService
 import com.carmencita.connect.model.Chatbot
 
 class ChatbotTarifasViewModel : ViewModel() {
 
-    private val assistant = ChatbotTarifasAssistant()
+    private val chatbotService = ChatbotTarifasService()
 
     private val _mensajes = MutableLiveData<List<Chatbot>>(
         listOf(
@@ -25,7 +25,7 @@ class ChatbotTarifasViewModel : ViewModel() {
         if (mensaje.isBlank()) return
 
         val actuales = _mensajes.value.orEmpty()
-        val respuesta = assistant.responder(mensaje)
+        val respuesta = chatbotService.responder(mensaje)
         _mensajes.value = actuales + Chatbot(mensaje, true) +
             Chatbot(respuesta, false)
     }

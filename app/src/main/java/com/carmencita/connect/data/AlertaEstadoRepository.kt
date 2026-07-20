@@ -22,25 +22,25 @@ class AlertaEstadoRepository(context: Context) {
     }
 
     fun estadoActual(): String {
-        val personaId = sesionRepository.obtenerPersonaId() ?: return AlertaEstadoPolicy.ESTADO_REGISTRADO
+        val personaId = sesionRepository.obtenerPersonaId() ?: return ReglasEstadoEnvio.ESTADO_REGISTRADO
         return preferences.getString(
             keyEstadoActual(personaId),
-            AlertaEstadoPolicy.ESTADO_REGISTRADO
-        ).orEmpty().ifBlank { AlertaEstadoPolicy.ESTADO_REGISTRADO }
+            ReglasEstadoEnvio.ESTADO_REGISTRADO
+        ).orEmpty().ifBlank { ReglasEstadoEnvio.ESTADO_REGISTRADO }
     }
 
     fun simularCambioEstado(): Alerta? {
         val personaId = sesionRepository.obtenerPersonaId() ?: return null
         val anterior = estadoActual()
-        val nuevo = AlertaEstadoPolicy.siguienteEstado(anterior)
+        val nuevo = ReglasEstadoEnvio.siguienteEstado(anterior)
         preferences.edit().putString(keyEstadoActual(personaId), nuevo).apply()
 
         return Alerta(
             numeroGuia = NUMERO_GUIA_DEMO,
             estadoAnterior = anterior,
             estadoNuevo = nuevo,
-            mensaje = AlertaEstadoPolicy.mensajeParaEstado(NUMERO_GUIA_DEMO, nuevo),
-            requiereRecojo = nuevo == AlertaEstadoPolicy.ESTADO_AGENCIA
+            mensaje = ReglasEstadoEnvio.mensajeParaEstado(NUMERO_GUIA_DEMO, nuevo),
+            requiereRecojo = nuevo == ReglasEstadoEnvio.ESTADO_AGENCIA
         )
     }
 

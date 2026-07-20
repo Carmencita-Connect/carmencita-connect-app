@@ -1,6 +1,6 @@
 package com.carmencita.connect.data
 
-object TelefonoSedeFormatter {
+object FormateadorTelefonoSede {
 
     fun normalizarParaMarcador(telefono: String): String? {
         val telefonoLimpio = telefono.trim()

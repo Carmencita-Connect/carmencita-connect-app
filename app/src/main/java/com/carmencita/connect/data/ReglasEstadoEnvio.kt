@@ -1,6 +1,6 @@
 package com.carmencita.connect.data
 
-object AlertaEstadoPolicy {
+object ReglasEstadoEnvio {
 
     const val ESTADO_REGISTRADO = "REGISTRADO"
     const val ESTADO_TRANSITO = "EN TRANSITO"

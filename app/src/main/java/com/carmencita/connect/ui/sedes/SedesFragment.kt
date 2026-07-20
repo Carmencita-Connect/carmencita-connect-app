@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.carmencita.connect.R
-import com.carmencita.connect.data.TelefonoSedeFormatter
+import com.carmencita.connect.data.FormateadorTelefonoSede
 import com.carmencita.connect.databinding.FragmentSedesBinding
 import com.carmencita.connect.databinding.ItemSedeBinding
 import com.carmencita.connect.model.Sede
@@ -80,7 +80,7 @@ class SedesFragment : Fragment() {
     }
 
     private fun llamarSede(telefono: String) {
-        val numero = TelefonoSedeFormatter.normalizarParaMarcador(telefono)
+        val numero = FormateadorTelefonoSede.normalizarParaMarcador(telefono)
         if (numero == null) {
             Toast.makeText(
                 requireContext(),

@@ -32,7 +32,7 @@ Clases principales:
 - `SedeRepository`
 - `NotificacionRepository`
 - `AlertaEstadoRepository`
-- `ChatbotTarifasAssistant`
+- `ChatbotTarifasService`
 
 ## ViewModel
 

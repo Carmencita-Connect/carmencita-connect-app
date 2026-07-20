@@ -3,7 +3,7 @@
 ## Pruebas unitarias automatizadas
 
 Estas pruebas cubren la logica del asistente virtual implementada en
-`ChatbotTarifasAssistant`. No dependen de la interfaz Android, por lo que se
+`ChatbotTarifasService`. No dependen de la interfaz Android, por lo que se
 ejecutan como pruebas unitarias locales.
 
 1.- Calculo de tarifa con datos completos

@@ -15,7 +15,7 @@
    - **To Email:** `{{to_email}}`
    - **Subject:** `Tu código de confirmación | Carmencita Express`
 4. Copiar en el contenido HTML la plantilla:
-   - `docs/emailjs_template_hu11.html`
+   - `documentacion/configuracion/emailjs_template_hu11.html`
 5. Guardar y copiar el **Template ID**.
 
 La app envía estas variables:

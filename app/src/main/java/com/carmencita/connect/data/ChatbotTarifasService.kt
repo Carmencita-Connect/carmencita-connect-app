@@ -3,7 +3,7 @@ package com.carmencita.connect.data
 import java.text.Normalizer
 import java.util.Locale
 
-class ChatbotTarifasAssistant(
+class ChatbotTarifasService(
     private val tarifaRepository: TarifaRepository = TarifaRepository()
 ) {
 
